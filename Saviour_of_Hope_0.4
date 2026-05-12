@@ -14,20 +14,115 @@ using namespace std;
     int schopnost;
     int cls;
     int menu;
-    int ehp;
+    int ehp1; int ehp2; int ehp3;
     int em;
+    int boss;
+    float edm; float eddm;
+    float dm;
+    int timeg = 0; int timeab; int timeo = 0;
+    int nahc;
+    int ncrit;
 
+
+void crit() {
+srand(time(0));
+ncrit = rand() % 101 + 0;
+}
+void nahod() {
+srand(time(0));
+nahc = rand() % 21 + 4;
+}
+
+void hatk () {
+    cout << "Vyberte na koho chcete zautocit jako prvni" << endl;
+}
+
+void latk () {
+
+}
 
 
 void combat () {
-    while (em > 0 && hp > 0) {
+    while (em > 0) {
 
+        timeab = timeab - 1; timeg = timeg - 1; timeo = timeo + 1;
+        cout << endl << endl << "------ Nyni jsi v boji ------" << endl << endl << timeo << ". kolo" << endl << endl << "Nepratele: " << endl;
+        
+        if (boss == 1) {
+
+            cout << "Nepritel zacina na tahu" << endl;
+
+
+
+        } else {
+
+            if (cls != 3) {
+                 cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Light attack (0,4 damage na vsechny nepratele)"<< endl << "3) Pouzit schopnost (schopnost lze pouzit pouze pokud jsou splneny podminky a schopnost byla pouzita naposledy pred  4 a nebo vice koly )" << endl; 
+                 cin >> menu;
+                 while (menu != 1 && menu != 2 && menu != 3) {
+                cout << endl << "Zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+            while (menu ==3 && timeg > 0 ) {
+                cout << endl << "Schopnost se stale nabiji" << endl;
+                cin >> menu;
+            }
+            while (cls == 1 && hp > 50) {
+                cout << endl <<"Nejsou splneny podminky aktivace schopnosti" << endl;
+                cin >> menu;
+            }
+            if (menu == 3) {
+
+                if (cls == 1) {
+                    cout << endl << "Aktivoval jsi schopnost Lion's final roar... Uzdravil jsi se o 40 zivotu a pristi 2 kola budes udelovat 3x poskozeni" << endl;
+                    hp = hp + 40; dm = 3;
+                    timeab = 3;  timeg = 5;
+                } else if (cls == 2) {
+                    cout << endl << "Aktivoval jsi schopnost Sparks of perfection... Toje mana byla obnovena na maximum a na pristi 3 kola budes udelovat 2x poskozeni" << endl;
+                    timeab = 4; mp = maxmp; dm = 2;  timeg = 5;
+                } else if (cls == 4) {
+                    cout << endl << "Aktivoval jsi schopnost True to my shape... Nepratele ti budou udelovat o 50% poskoteni mene na pristi 3 kola" << endl;
+                    timeab = 4; eddm = 0.5; timeg = 5;
+                }
+            } else if (menu == 1) {
+
+
+                
+            } else if (menu == 2) {
+
+
+
+            }
+
+
+            } else if (cls == 3) {
+                cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Splash attack (0,4 damage na vsechny nepratele)" << endl;
+                cin >> menu;
+            while (menu != 1 && menu != 2) {
+                cout << endl << "zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+
+
+
+            }
+            
+            
+
+        }
+
+
+    }
+    if(em == 0) {
+        cout << "dsa" << endl;
+    } else if (hp <= 0) {
+        cout << "dsa" << endl;
     }
 }
 
 
 void cont () {
-    cout << endl << endl << "---- Pro pokracovani stiskni libovolnou klavesu ----" << endl << endl;
+    cout << endl << endl << "------ Pro pokracovani stiskni libovolnou klavesu ------" << endl << endl;
     getch();
 }
 
@@ -35,7 +130,7 @@ void cont () {
 void conqueror () {
    cout << "--------------------------------" << endl << "Conqueror" << endl << "--------------------------------" << endl;
    maxhp = 200; maxmp = 30; penize = 5; atk = 15; schopnost = 1;
-   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Lion's final roar... Pouze aktivovatelna pokud ma hrac pod 50 HP. 3x poskozeni na dva tahy, +30 HP" << endl << endl << "1) Vybrat" << endl << "2) Zpět" << endl << endl << "--------------------------------"<< endl;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Lion's final roar... Pouze aktivovatelna pokud ma hrac pod 50 HP. 3x poskozeni na dva tahy, +40 HP" << endl << endl << "1) Vybrat" << endl << "2) Zpět" << endl << endl << "--------------------------------"<< endl;
    cin >> menu;
    switch (menu) {
     case 1:
@@ -214,7 +309,6 @@ int main () {
     cont ();
     cout << "A v tu chvili ti doslo, ze ten svet venku neni hezky." << endl << "Jen cekal, az udelas prvni chybu.";
     cont();
-
 
 
 }
