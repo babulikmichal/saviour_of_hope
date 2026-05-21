@@ -1,0 +1,579 @@
+#include <iostream>
+#include <ctime>
+#include <conio.h>
+using namespace std;
+
+    int whil = 1;
+     string jmeno;
+    int maxhp;
+    int hp;
+    int maxmp;
+    int mp;
+    int penize;
+    int atk; int dmg;
+    int schopnost;
+    int cls;
+    int menu;
+    int ehp1; int ehp2; int ehp3; int el1; int el2; int el3; string ej1; string ej2; string ej3;
+    int em;
+    int boss;
+    float edm; float eddm;
+    float dm;
+    int timeg = 0; int timeab; int timeo = 0;
+    int nahc;
+    int ncrit; int nacrit;
+    int edmg; int edmgmult1; int edmgmult2; int edmgmult3;
+
+void cont () {
+    cout << endl << endl << "------ Pro pokracovani stiskni libovolnou klavesu ------" << endl << endl;
+    getch();
+}
+
+void lcrit() {
+srand(time(0));
+nacrit = rand() % 101 + 0;
+if (nacrit == 100 || ncrit == 1) {
+    dmg = atk * 1.5 * dm;
+} else {
+    dmg = atk * dm;
+}
+}
+
+void crit() {
+srand(time(0));
+ncrit = rand() % 101 + 0;
+if (ncrit == 100 || ncrit == 1) {
+    dmg = atk * 1.5 * dm * 0.4;
+} else {
+    dmg = atk * dm;
+}
+}
+void nahod() {
+srand(time(0));
+nahc = rand() % 21 + 4;
+}
+
+
+
+void hatk () {
+    crit;
+    cout << "Vyberte na koho chcete zautocit jako prvni" << endl;
+    cin >> menu;
+    if (em == 1) {
+
+        while (menu != 1) {
+            cout << endl << "Zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+        
+        ehp1= ehp1 - dmg;
+
+    } else if (em == 2) {
+
+        while (menu != 1 || menu != 2) {
+            cout << endl << "Zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+        if (menu == 1) {
+            ehp1= ehp1 - dmg;
+        } else if (menu == 2) {
+            ehp2= ehp2 - dmg;
+        }
+
+
+    } else if (em == 3) {
+        
+        while (menu != 1 || menu != 2 || menu != 3) {
+            cout << endl << "Zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+        if (menu == 1) {
+            ehp1= ehp1 - dmg;
+        } else if (menu == 2) {
+            ehp2= ehp2 - dmg;
+        } else {
+            ehp3 = ehp3 - dmg;
+        }
+    }
+
+    cout << endl << "Nove zivoty:" << endl;
+    
+    if (ehp1 > 0) {
+        cout << "1 ... " << ej1 << " ... Level" << el1 << " ... Zivoty " << ehp1 << endl;
+        } else {
+            cout << "1 ... " << ej1 << " ... Porazen" << endl;
+        }
+        if (em == 2) {
+            if (ehp2 > 0) {
+                cout << "2 ... " << ej2 << " ... Level" << el2 << " ... Zivoty " << ehp2 << endl;
+            }else {
+            cout << "2 ... " << ej2 << " ... Porazen" << endl;
+        }
+         }else if (em =3) {
+            if (ehp3 > 0) {
+            cout << "3 ... " << ej3 << " ... Level" << el3 << " ... Zivoty " << ehp3 << endl << endl;
+            }else {
+            cout << "3 ... " << ej3 << " ... Porazen" << endl;
+        }
+        }
+
+}
+
+void latk () {
+
+    lcrit;
+    ehp1 = ehp1 - dmg; ehp2 = ehp2 - dmg; ehp3 = ehp3 - dmg;
+    cout << endl << "Nove zivoty:" << endl;
+    
+    if (ehp1 > 0) {
+        cout << "1 ... " << ej1 << " ... Level" << el1 << " ... Zivoty " << ehp1 << endl;
+        } else {
+            cout << "1 ... " << ej1 << " ... Porazen" << endl;
+        }
+        if (em == 2) {
+            if (ehp2 > 0) {
+                cout << "2 ... " << ej2 << " ... Level" << el2 << " ... Zivoty " << ehp2 << endl;
+            }else {
+            cout << "2 ... " << ej2 << " ... Porazen" << endl;
+        }
+         }else if (em =3) {
+            if (ehp3 > 0) {
+            cout << "3 ... " << ej3 << " ... Level" << el3 << " ... Zivoty " << ehp3 << endl << endl;
+            }else {
+            cout << "3 ... " << ej3 << " ... Porazen" << endl;
+        }
+        }
+
+}
+
+
+void combat () {
+    while (em > 0) {
+
+        timeab = timeab - 1; timeg = timeg - 1; timeo = timeo + 1; dmg = atk;
+        cout << endl << endl << "------ Nyni jsi v boji ------" << endl << endl << timeo << ". kolo" << endl << endl << "Vase zivoty:" << hp << endl << endl << "Nepratele: " << endl;
+
+        if (ehp1 > 0) {
+        cout << "1 ... " << ej1 << " ... Level" << el1 << " ... Zivoty " << ehp1 << endl;
+        } else {
+            cout << "1 ... " << ej1 << " ... Porazen" << endl;
+        }
+        if (em == 2) {
+            if (ehp2 > 0) {
+                cout << "2 ... " << ej2 << " ... Level" << el2 << " ... Zivoty " << ehp2 << endl;
+            }else {
+            cout << "2 ... " << ej2 << " ... Porazen" << endl;
+        }
+         }else if (em =3) {
+            if (ehp3 > 0) {
+            cout << "3 ... " << ej3 << " ... Level" << el3 << " ... Zivoty " << ehp3 << endl << endl;
+            }else {
+            cout << "3 ... " << ej3 << " ... Porazen" << endl;
+        }
+        }
+
+        if (boss == 1) {
+
+            cout << "Nepritel zacina na tahu" << endl;
+
+             if(em == 1){
+                nahod;
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 2) {
+                nahod;
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod;
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 3) {
+                nahod;
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod;
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                hp = hp - edmg;
+                nahod;
+                edmg = nahc * edmgmult3;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            }
+
+                        if (cls != 3) {
+                 cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Light attack (0,4 damage na vsechny nepratele)"<< endl << "3) Pouzit schopnost (schopnost lze pouzit pouze pokud jsou splneny podminky a schopnost byla pouzita naposledy pred  4 a nebo vice koly )" << endl; 
+                 cin >> menu;
+                 while (menu != 1 && menu != 2 && menu != 3) {
+                cout << endl << "Zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+            while (menu ==3 && timeg > 0 ) {
+                cout << endl << "Schopnost se stale nabiji" << endl;
+                cin >> menu;
+            }
+            while (cls == 1 && hp > 50) {
+                cout << endl <<"Nejsou splneny podminky aktivace schopnosti" << endl;
+                cin >> menu;
+            }
+            if (menu == 3) {
+
+                if (cls == 1) {
+                    cout << endl << "Aktivoval jsi schopnost Lion's final roar... Uzdravil jsi se o 40 zivotu a pristi 2 kola budes udelovat 3x poskozeni" << endl;
+                    hp = hp + 40; dm = 3;
+                    timeab = 3;  timeg = 5;
+                } else if (cls == 2) {
+                    cout << endl << "Aktivoval jsi schopnost Sparks of perfection... Toje mana byla obnovena na maximum a na pristi 3 kola budes udelovat 2x poskozeni" << endl;
+                    timeab = 4; mp = maxmp; dm = 2;  timeg = 5;
+                } else if (cls == 4) {
+                    cout << endl << "Aktivoval jsi schopnost True to my shape... Nepratele ti budou udelovat o 50% poskoteni mene na pristi 3 kola" << endl;
+                    timeab = 4; eddm = 0.5; timeg = 5;
+                }
+            } else if (menu == 1) {
+
+                hatk;
+                
+            } else if (menu == 2) {
+
+                latk;
+
+            }
+
+
+            } else if (cls == 3) {
+                cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Splash attack (0,4 damage na vsechny nepratele)" << endl;
+                cin >> menu;
+            while (menu != 1 && menu != 2) {
+                cout << endl << "zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+
+            if (menu == 1) {
+
+                hatk;
+
+            }else if (menu == 2) {
+
+                latk;
+
+            }
+
+
+            }
+
+
+
+        } else {
+
+            if (cls != 3) {
+                 cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Light attack (0,4 damage na vsechny nepratele)"<< endl << "3) Pouzit schopnost (schopnost lze pouzit pouze pokud jsou splneny podminky a schopnost byla pouzita naposledy pred  4 a nebo vice koly )" << endl; 
+                 cin >> menu;
+                 while (menu != 1 && menu != 2 && menu != 3) {
+                cout << endl << "Zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+            while (menu ==3 && timeg > 0 ) {
+                cout << endl << "Schopnost se stale nabiji" << endl;
+                cin >> menu;
+            }
+            while (cls == 1 && hp > 50) {
+                cout << endl <<"Nejsou splneny podminky aktivace schopnosti" << endl;
+                cin >> menu;
+            }
+            if (menu == 3) {
+
+                if (cls == 1) {
+                    cout << endl << "Aktivoval jsi schopnost Lion's final roar... Uzdravil jsi se o 40 zivotu a pristi 2 kola budes udelovat 3x poskozeni" << endl;
+                    hp = hp + 40; dm = 3;
+                    timeab = 3;  timeg = 5;
+                } else if (cls == 2) {
+                    cout << endl << "Aktivoval jsi schopnost Sparks of perfection... Toje mana byla obnovena na maximum a na pristi 3 kola budes udelovat 2x poskozeni" << endl;
+                    timeab = 4; mp = maxmp; dm = 2;  timeg = 5;
+                } else if (cls == 4) {
+                    cout << endl << "Aktivoval jsi schopnost True to my shape... Nepratele ti budou udelovat o 50% poskoteni mene na pristi 3 kola" << endl;
+                    timeab = 4; eddm = 0.5; timeg = 5;
+                }
+            } else if (menu == 1) {
+
+                hatk;
+                
+            } else if (menu == 2) {
+
+                latk;
+
+            }
+
+
+            } else if (cls == 3) {
+                cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Splash attack (0,4 damage na vsechny nepratele)" << endl;
+                cin >> menu;
+            while (menu != 1 && menu != 2) {
+                cout << endl << "zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+
+            if (menu == 1) {
+
+                hatk;
+
+            }else if (menu == 2) {
+
+                latk;
+
+            }
+
+
+            }
+            
+            cout << endl << "Nepritel je nini na tahu" << endl;
+            if(em == 1){
+                nahod;
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 2) {
+                nahod;
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod;
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 3) {
+                nahod;
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod;
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                hp = hp - edmg;
+                nahod;
+                edmg = nahc * edmgmult3;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            }
+
+        }
+
+
+    }
+    if(em == 0) {
+        cout << "Vsichni nepratele byli porazeni... konec boje" << endl;
+    } else if (hp <= 0) {
+        cout << "Demon te srazil k zemi." << endl <<"Tvuj dech se zlomil, svet se rozmazal a bolest se rozlila tvym telem jako ohen." << endl << "Snazil jsi se zvednout, ale ruce te neposlouchaly." << endl;
+        cont;
+        cout << "Bylo pozde." << endl;
+        cont;
+        cout << "Kdyz se nad tebou demon sklonil, naposledy jsi videl jeho cervene oci — prazdne, hladove, bez jakekoliv emoce." << endl;
+        cont;
+        cout << "A pak prisla tma." << endl;
+        cont;
+        cout << "Ale v te tme jsi stale slysel svuj vlastni hlas." << endl << "Slaby, unaveny, ale jasny." << endl;
+        cont;
+        cout << "„Ja… ja jsem chtel odejit uz driv,“ problesklo ti hlavou." << endl;
+        cont;
+        cout << "„Chtel jsem to zkusit. Chtel jsem neco zmenit. Ale nikdy jsem se k tomu neodhodlal…“"<< endl;
+        cont;
+        cout << "Ticho." << endl << "Studene, nekonecne." << endl;
+        cont;
+        cout << "„A ted… ted vidim, ze to byla chyba.“" << endl;
+        cont;
+        cout << "Tvoje posledni myslenka nebyla o strachu." << endl << "Byla o litu." <<endl << "O tom, ze jsi mel odejit driv." << endl <<"O tom, ze jsi mel zkusit bojovat, i kdyz ostatni uz davno prestali." << endl;
+        cont;
+        cout << "A pak se svet kolem tebe rozpadl." << endl << "A s nim i posledni nadeje." <<endl;
+        cont;
+        cout << endl << endl << "„Padl posledni, kdo se jeste odvazil verit.“" << endl << "„Svet ztratil svou posledni jiskru.“" << endl;
+    }
+}
+
+
+
+
+
+void conqueror () {
+   cout << "--------------------------------" << endl << "Conqueror" << endl << "--------------------------------" << endl;
+   maxhp = 200; maxmp = 30; penize = 5; atk = 15; schopnost = 1;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Lion's final roar... Pouze aktivovatelna pokud ma hrac pod 50 HP. 3x poskozeni na dva tahy, +40 HP" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------"<< endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 1;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void arch () {
+   cout << "--------------------------------" << endl << "Arch" << endl << "--------------------------------" << endl;
+   maxhp = 120; maxmp = 100; penize = 8; atk = 18; schopnost = 2;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Sparks of perfection... 2x poskozeni na 3 tahy a doplneni many na max" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------"<< endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 2;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void persuader () {
+   cout << "--------------------------------" << endl << "Persuader" << endl << "--------------------------------" << endl;
+   maxhp = 100; maxmp = 20; penize = 30; atk = 8; schopnost = 3;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Desire without a limit... Pasivni schopnost zvysujici sanci na zisk penez z monster z 50% na 100%" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------"<< endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 3;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void abomination () {
+   cout << "--------------------------------" << endl << "Abomination" << endl << "--------------------------------" << endl;
+   maxhp = 100; maxmp = 50; penize = 3; atk = 25; schopnost = 4;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... True to my shape... 3 pristi tahy nepritele udeli o 50% mene poskozeni" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------" << endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 4;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void classmenu () {
+    while (whil == 1) {
+    int menu;
+    cout << "Jak se jemnujete... ";
+    cin >> jmeno;
+    cout << "--------------------------------" << endl << "Vyberte si jednu z class" << endl;
+        cout << "1) Conqueror" << endl << "2) Arch" << endl << "3) Persuader" << endl << "4) Abomination" << endl <<  endl << "5) Zpet" << "--------------------------------" << endl;
+        cin >> menu;
+
+        while(menu < 1 && menu > 5) {
+        cout << "zadejte platnou hodnotu" << endl;
+        cin >> menu;
+        }
+
+        switch (menu) {
+            case 1:
+            conqueror ();
+            break;
+
+            case 2:
+            arch ();
+            break;
+
+            case 3:
+            persuader ();
+            break;
+
+            case 4:
+            abomination ();
+            break;
+
+            case 5:
+            return;
+            break;
+        }
+}
+}
+
+int main () {
+
+    int menu;
+    
+
+    while (whil == 1) {
+    cout << "Vitejte v Saviour of Hope" << endl << "--------------------------------"<< endl;
+    cout << "1) Hrat" << endl << "2) Ukoncit" << endl << "--------------------------------" << endl;
+    cin >> menu;
+
+    while(menu != 1 && menu != 2) {
+        cout << "zadejte platnou hodnotu" << endl;
+        cin >> menu;
+    }
+    switch (menu) {
+        case 1:
+        classmenu ();
+        break;
+
+        case 2:
+        cout << "--------------------------------" << endl << "jste si jisti ze chcete kukoncit hru?" << endl << "1) Ukoncit" << endl << "2) Zpet" << endl << "--------------------------------" << endl;
+        cin >> menu;
+
+        while(menu != 1 && menu != 2) {
+        cout << "zadejte platnou hodnotu" << endl;
+        cin >> menu;
+    }
+
+    if (menu == 1) {
+            return 0;
+        }
+    }
+}
+    cout << endl << endl << endl << endl << "--------------------------------" << endl << "Kdysi byval svet plny svetla. Lide ovladali magii, rodili se se schopnostmi, ktere dokazaly menit beh dejin. Byli strazci rovnovahy, ochranci risi, posledni hrazi proti temnote. Ale kdyz se otevrel brany Pekelne rise, jejich sila nestacila.";
+    cout << endl << "Osmnactileta valka spalila vse" << endl << "Hrdinove padli, mesta se zmenila v ruiny, magie se vycerpala. Demonicti pani si rozdelili svet jako korist a jejich armady hlidaji kazdy kout zeme." << endl; 
+    cont();
+    cout << "A pak prislo to nejhorsi — ticho." << endl << "Ne boj, ne odpor. Jen ticho tech, kteri uz nemaji silu zvednout hlavu." << endl << "Lide se schovavaji v troskach, v jeskynich, v podzemnich tunelech. Neveri v navrat svetla. Vetsina z nich uz prijala, ze svet patri demonum. Ze nadeje byla jen pohadka pro deti. Ze hrdinove jsou mrtvi a magie je jen ozvena minulosti." << endl;
+    cout << endl << "Ale ty… ty jsi jiny." << endl << endl << "Ne proto, ze bys byl silnejsi. Ne proto, ze bys mel moc zmenit svet. Ale proto, ze ses odmitl vzdat. Protoze v tobe zustalo neco, co ostatni ztratili — presvedceni, ze i v popelu muze prezit jiskra." << endl << endl << "--------------------------------" << endl << endl;
+    cont();
+
+    cout << "Probudil jsi se s pocitem, jako by ti nekdo rozdrtil lebku kamenem." << endl << "Kocovina. Zase..." << endl << "V tomhle svete je to jedina vec, ktera jeste dokaze cloveka na chvili odtrhnout od reality." << endl << "Od toho, co z ni zustalo." << endl << endl;
+    cout << "Zvedl jsi se z provizorniho luzka, ktere vrzalo jako stara kost. Vzduch v ukrytu byl tezky, zatuchly, plny dychu lidi, kteri uz davno prestali zit a jen prezivaji." << endl << "Nekteri se smali. Takovy ten smich, co zni spis jako priznani porazky." << endl <<"Jini jen sedeli a koukali do zdi." << endl << "A ty... ty jsi se snazil vzpomenout, kolik jsi toho vlastne vypil. A proc." << endl;
+    cont();
+    cout << "Tenhle zivot te znechucoval. " << "„K cemu je zivot kdyz ho ani nemuzes zit,“ pomyslel sis." << endl;
+    cout << "Vyrazil jsi mezi ostatni a prezivci a zacal jsi se ptat na otazky jako, co se deje venku, jestli se nekdo jeste pokousi bojovat." << endl;
+    cout << "Odpovedi byly vzdycky stejne." << endl << "Kroutili hlavou. Rikali ti, ze venku neni nic, jen demoni, prach a smrt. Ze tady je to jedine misto, kde se da prezit. Ze nadeje je jen slovo, ktere uz nema zadny vyznam." << endl;
+    cont();
+    cout << "Tvoje otazky ale neuplne zapadly. Velitel ukrytu si te zavolal." << endl << "Sedel za starou deskou stolu, popraskanou a poskrabanou, jako by prezila vic bitev nez on sam. Kdyz jsi vstoupil, ani se na tebe nepodival." << endl;
+    cout << "„Ty chces odejit,“ pronesl klidne." << endl << "Chvili mlcel, jako by hledal slova, ktera uz davno ztratila silu." << endl;
+    cont();
+    cout << "„Nedelej to. Venku neni nic, co by stalo za to. Tady mas aspon sanci. Tam venku... tam venku jsi jen dalsi mrtvola, ktera jeste nevi, ze je mrtva.“" << endl << "Neodpovedel jsi. Nemusel jsi." << endl << "Videla to na tobe kazda vraska v jeho tvari." << endl;
+    cout << "Nakonec jen prikyvl. Pomalu, smutne, ale bez odporu." << endl;
+    cont();
+    cout << "Zvedl se a zasel do sve komory." << endl << " Ty jsi se taky zvedl a chstal jsi se odejit, kdyz vturanu se ozval krikot at pockas. Byl to velitel ukrytu nesouci ";
+    if (cls == 1) {
+        cout << "Greatsword of the blessed... dvojrucni mec se kterim bojoval velitel proti demonum behem Osmnactilete valky... Naviseni poskozeni: x1.00";
+    } else if (cls == 2){
+        cout << "Staff of sorrow... mocna kouzelna hul se kterou bojoval velitel proti demonum behem Osmnactilete valky... Naviseni poskozeni: x1.00, Naviseni many: x1.00";
+    }else if (cls == 3) {
+        cout << "Dreaded dagger... velice leskla dyka s obrovským krystalem na zacatku rukojeti, drive patrici tvemu otci ktery padl behem Osmnactilete valky... Naviseni poskozeni: x1.00";
+    }else if (cls == 4) {
+        cout << "Boxer of suffering... Velmi tezky boxer kradeny demonum Osmnactilete valky... Naviseni poskozeni: x1.00";
+    }
+
+    cout << endl << endl << "A tak jsi odesel. " << endl << "Do sveta, ktery uz nepatri lidem.";
+    cont();
+
+    cout << "Kdyz jsi vysel z ukrytu, cekal jsi spoust. Spalena zeme. Roztrhane stromy. Krev, kosti, popel." << endl << "Ale misto toho te uvitalo ticho. A svetlo." << endl;
+    cout <<  "Slunce se opiralo do zemi, jako by se snazilo predstirat, ze je vsechno v poradku. Trava se na nekterych mistech dokonce drzela pri zivote, zelena a tvrda, jako by se odmitala vzdat. Vzduch byl cisty, nezvykle klidny. Na okamzik jsi mel pocit, ze tohle misto snad ani nepatri do toho sameho sveta, ktery jsi opustil." << endl;
+    cont();
+    cout << "Udelal jsi par kroku dal, pomalu, opatrne, jako bys nechtel ten klid vyplašit. A pak te to napadlo." << endl << "„Tohle… vypada hezky,“ problesklo ti hlavou." << endl << "„Vubec ne tak, jak jsem si to predstavoval.“" << endl;
+    cont();
+    cout << "Byla to pravda. A mozna prave proto to bylo spatne." << endl << "Ten klid byl prilis cisty. Prilis tichy. Prilis… umely." << endl << "A pak se to stalo. " << endl;
+    cont();
+    cout << "Zleva se ozval zvuk, jako kdyz nekdo trha maso z kosti. Nizky, vlhky, nechutne pomaly." << endl << "Zastavil jsi se. Otočil jsi hlavu." << endl;
+    cont();
+    cout << "A tam stal on.  Prvni demon, ktereho jsi kdy videl z takove blizkosti." << endl;
+    cont();
+    cout << "Nebyl obrovsky. Nebyl ani obrneny. Ale jeho telo bylo zkroucene, jako by ho nekdo poskladal z nespravnych casti."<< endl << " Kuze mu visela v pruzich, oci zarily cervenou, a z ust mu kapala cernota, ktera sycela, kdyz dopadla na zem." << endl;
+    cont ();
+    cout << "A hlavne — dival se primo na tebe." << endl;
+    cont ();
+    cout << "A v tu chvili ti doslo, ze ten svet venku neni hezky." << endl << "Jen cekal, az udelas prvni chybu.";
+    cont();
+
+
+}
