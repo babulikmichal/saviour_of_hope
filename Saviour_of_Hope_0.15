@@ -1,0 +1,1870 @@
+#include <iostream>
+#include <ctime>
+#include <conio.h>
+using namespace std;
+
+    int whil = 1;
+     string jmeno;
+    float maxhp;
+    float hp;
+    int maxmp;
+    int mp;
+    int penize;
+    float atk; float dmg;
+    int schopnost;
+    int cls;
+    int menu;
+    float ehp1 = 0; float ehp2 = 0; float ehp3 = 0; int el1; int el2; int el3; string ej1; string ej2; string ej3;
+    int em;
+    int boss;
+    float edm; float eddm;
+    float dm = 1;
+    int timeg = 0; int timeab; int timeo = 0;
+    int nahc;
+    int ncrit; int nacrit;
+    float edmg; float edmgmult1; float edmgmult2; float edmgmult3;
+    int penaze;
+    int dal;
+    int level;
+    float nabiti;
+
+void cont () {
+    cout << endl << endl << "------ Pro pokracovani stiskni libovolnou klavesu ------" << endl << endl;
+    getch();
+}
+
+void lcrit() {
+srand(time(0));
+nacrit = rand() % 101 + 0;
+if (nacrit == 100 || ncrit == 1) {
+    dmg = atk * 1.5 * dm * 0.4;
+} else {
+    dmg = atk * dm * 0.4;
+}
+}
+
+void crit() {
+srand(time(0));
+ncrit = rand() % 101 + 0;
+if (ncrit == 100 || ncrit == 1) {
+    dmg = atk * 1.5 * dm;
+} else {
+    dmg = atk * dm;
+}
+}
+void nahod() {
+srand(time(0));
+nahc = rand() % 8 + 2;
+}
+
+void penizky() {
+srand(time(0));
+penaze = rand() % 4 + 1;
+}
+
+
+
+void hatk () {
+    crit(); 
+        
+        ehp1= ehp1 - dmg;
+
+    if (em == 2) {
+
+        cout << "Vyberte na koho chcete zautocit jako prvni" << endl;
+    cin >> menu;
+
+        while (menu != 1 || menu != 2) {
+            cout << endl << "Zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+        if (menu == 1) {
+            ehp1= ehp1 - dmg;
+        } else if (menu == 2) {
+            ehp2= ehp2 - dmg;
+        }
+
+
+    } else if (em == 3) {
+        cout << "Vyberte na koho chcete zautocit jako prvni" << endl;
+    cin >> menu;
+        while (menu != 1 || menu != 2 || menu != 3) {
+            cout << endl << "Zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+        if (menu == 1) {
+            ehp1= ehp1 - dmg;
+        } else if (menu == 2) {
+            ehp2= ehp2 - dmg;
+        } else {
+            ehp3 = ehp3 - dmg;
+        }
+    }
+    if (cls == 2) {
+        mp = mp -5;
+    } else if (cls == 4){
+        mp = mp - 2;
+    }
+
+    cout << endl << "Nove zivoty:" << endl;
+    
+    if (ehp1 > 0) {
+        cout << "1 ... " << ej1 << " ... Level" << el1 << " ... Zivoty " << ehp1 << endl;
+        } else {
+            cout << "1 ... " << ej1 << " ... Porazen" << endl;
+        }
+        if (em == 2) {
+            if (ehp2 > 0) {
+                cout << "2 ... " << ej2 << " ... Level" << el2 << " ... Zivoty " << ehp2 << endl;
+            }else {
+            cout << "2 ... " << ej2 << " ... Porazen" << endl;
+        }
+         }
+         if (em ==3) {
+            if (ehp3 > 0) {
+            cout << "3 ... " << ej3 << " ... Level" << el3 << " ... Zivoty " << ehp3 << endl << endl;
+            }else {
+            cout << "3 ... " << ej3 << " ... Porazen" << endl;
+        }
+        }
+
+}
+
+void latk () {
+
+    lcrit();
+    ehp1 = ehp1 - dmg; ehp2 = ehp2 - dmg; ehp3 = ehp3 - dmg;
+    cout << endl << "Nove zivoty:" << endl;
+    if (cls == 2) {
+        mp = mp -5;
+    }else if (cls == 4){
+        mp = mp - 2;
+    }
+    
+    if (ehp1 > 0) {
+        cout << "1 ... " << ej1 << " ... Level" << el1 << " ... Zivoty " << ehp1 << endl;
+        } else {
+            cout << "1 ... " << ej1 << " ... Porazen" << endl;
+        }
+        if (em == 2) {
+            if (ehp2 > 0) {
+                cout << "2 ... " << ej2 << " ... Level" << el2 << " ... Zivoty " << ehp2 << endl;
+            }else {
+            cout << "2 ... " << ej2 << " ... Porazen" << endl;
+        }
+         }
+        if (em =3) {
+            if (ehp3 > 0) {
+            cout << "3 ... " << ej3 << " ... Level" << el3 << " ... Zivoty " << ehp3 << endl << endl;
+            }else {
+            cout << "3 ... " << ej3 << " ... Porazen" << endl;
+        }
+        }
+        
+
+}
+
+
+void combat () {
+    timeo = 0;
+    while (ehp1 > 0 || ehp2 > 0 || ehp3 > 0) {
+
+        timeo = timeo + 1; dmg = atk;
+        if (timeab > 0) {
+            timeab = timeab - 1;
+        } else if (timeab == 0) {
+            dm =1;
+        }
+        if (timeg > 0) {
+            timeg = timeg - 1;
+        }
+        cout << endl << endl << "------ Nyni jsi v boji ------" << endl << endl << timeo << ". kolo" << endl << endl << "Vase zivoty:" << hp << endl << endl << "Nepratele: " << endl;
+
+        if (ehp1 > 0) {
+        cout << "1 ... " << ej1 << " ... Level" << el1 << " ... Zivoty " << ehp1 << endl;
+        } else {
+            cout << "1 ... " << ej1 << " ... Porazen" << endl;
+        }
+        if (em == 2) {
+            if (ehp2 > 0) {
+                cout << "2 ... " << ej2 << " ... Level" << el2 << " ... Zivoty " << ehp2 << endl;
+            }else {
+            cout << "2 ... " << ej2 << " ... Porazen" << endl;
+        }
+         }
+        if (em ==3) {
+            if (ehp3 > 0) {
+            cout << "3 ... " << ej3 << " ... Level" << el3 << " ... Zivoty " << ehp3 << endl << endl;
+            }else {
+            cout << "3 ... " << ej3 << " ... Porazen" << endl;
+        }
+        }
+        if (boss == 2) {
+            edmg = 0;
+            cout << "Nepritel zacina na tahu" << endl;
+            if (level > 0) {
+                penizky();
+                nabiti = timeo * penaze;
+                cout << endl << "Ascendrax se živí na tvé síle a nabíjí svůj 1 útok. Připravuje útok o síle "<< nabiti << endl; 
+                edmg = nabiti;
+            }
+            if (level > 1) {
+                penizky();
+                nabiti = timeo * penaze;
+                edmg = edmg + nabiti;
+                cout << endl << "Ascendrax se živí na tvé síle a nabíjí svůj 2 útok. Připravuje útok o síle "<< nabiti << endl; 
+
+            }
+            if (level == 3) {
+                penizky();
+                nabiti = timeo * penaze;
+                edmg = edmg + nabiti;
+                cout << endl << "Ascendrax se živí na tvé síle a nabíjí svůj 3 útok. Připravuje útok o síle "<< nabiti << endl; 
+            }
+            hp = hp - edmg;
+            cout << endl <<"Vase nove zivoty... " << hp << endl;
+
+
+            if (cls != 3) {
+                 cout << "Tvuj tah zacina" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Light attack (0,4 damage na vsechny nepratele)"<< endl << "3) Pouzit schopnost (schopnost lze pouzit pouze pokud jsou splneny podminky a schopnost byla pouzita naposledy pred  4 a nebo vice koly )" << endl; 
+                 cin >> menu;
+                 while (menu >3 || menu < 1) {
+                cout << endl << "Zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+            while (menu ==3 && timeg > 0 ) {
+                cout << endl << "Schopnost se stale nabiji" << endl;
+                cin >> menu;
+            }
+            
+            if (menu == 3) {
+
+                if (cls == 1) {
+                    cout << endl << "Aktivoval jsi schopnost Lion's final roar... Uzdravil jsi se o 40 zivotu a pristi 2 kola budes udelovat 3x poskozeni" << endl;
+                    hp = hp + 40; dm = 3;
+                    timeab = 2;  timeg = 5;
+                } else if (cls == 2) {
+                    cout << endl << "Aktivoval jsi schopnost Sparks of perfection... Toje mana byla obnovena na maximum a na pristi 3 kola budes udelovat 2x poskozeni" << endl;
+                    timeab = 4; mp = maxmp; dm = 2;  timeg = 5;
+                } else if (cls == 4) {
+                    cout << endl << "Aktivoval jsi schopnost True to my shape... Nepratele ti budou udelovat o 50% poskoteni mene na pristi 3 kola" << endl;
+                    timeab = 4; eddm = 0.5; timeg = 5;
+                }
+            } else if (menu == 1) {
+
+                hatk();
+                
+            } else if (menu == 2) {
+
+                latk();
+
+            }
+
+
+            } else if (cls == 3) {
+                cout << "Tvuj tah zacina" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Splash attack (0,4 damage na vsechny nepratele)" << endl;
+                cin >> menu;
+            while (menu != 1 && menu != 2) {
+                cout << endl << "zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+
+            if (menu == 1) {
+
+                hatk();
+
+            }else if (menu == 2) {
+
+                latk();
+
+            }
+
+
+            }
+        }else if (boss == 1) {
+
+            cout << "Nepritel zacina na tahu" << endl;
+
+             if(em == 1){
+                nahod();
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 2) {
+                nahod();
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod();
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 3) {
+                nahod();
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod();
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                hp = hp - edmg;
+                nahod();
+                edmg = nahc * edmgmult3;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            }
+
+                        if (cls != 3) {
+                 cout << "Tvuj tah zacina" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Light attack (0,4 damage na vsechny nepratele)"<< endl << "3) Pouzit schopnost (schopnost lze pouzit pouze pokud jsou splneny podminky a schopnost byla pouzita naposledy pred  4 a nebo vice koly )" << endl; 
+                 cin >> menu;
+                 while (menu >3 || menu < 1) {
+                cout << endl << "Zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+            while (menu ==3 && timeg > 0 ) {
+                cout << endl << "Schopnost se stale nabiji" << endl;
+                cin >> menu;
+            }
+            
+            if (menu == 3) {
+
+                if (cls == 1) {
+                    cout << endl << "Aktivoval jsi schopnost Lion's final roar... Uzdravil jsi se o 40 zivotu a pristi 2 kola budes udelovat 3x poskozeni" << endl;
+                    hp = hp + 40; dm = 3;
+                    timeab = 2;  timeg = 5;
+                } else if (cls == 2) {
+                    cout << endl << "Aktivoval jsi schopnost Sparks of perfection... Toje mana byla obnovena na maximum a na pristi 3 kola budes udelovat 2x poskozeni" << endl;
+                    timeab = 4; mp = maxmp; dm = 2;  timeg = 5;
+                } else if (cls == 4) {
+                    cout << endl << "Aktivoval jsi schopnost True to my shape... Nepratele ti budou udelovat o 50% poskoteni mene na pristi 3 kola" << endl;
+                    timeab = 4; eddm = 0.5; timeg = 5;
+                }
+            } else if (menu == 1) {
+
+                hatk();
+                
+            } else if (menu == 2) {
+
+                latk();
+
+            }
+
+
+            } else if (cls == 3) {
+                cout << "Tvuj tah zacina" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Splash attack (0,4 damage na vsechny nepratele)" << endl;
+                cin >> menu;
+            while (menu != 1 && menu != 2) {
+                cout << endl << "zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+
+            if (menu == 1) {
+
+                hatk();
+
+            }else if (menu == 2) {
+
+                latk();
+
+            }
+
+
+            }
+
+
+
+        } else if (boss == 0){
+
+            if (cls != 3) {
+                 cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Light attack (0,4 damage na vsechny nepratele)"<< endl << "3) Pouzit schopnost (schopnost lze pouzit pouze pokud jsou splneny podminky a schopnost byla pouzita naposledy pred  4 a nebo vice koly )" << endl; 
+                 cin >> menu;
+                 while (menu != 1 && menu != 2 && menu != 3) {
+                cout << endl << "Zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+            while (menu ==3 && timeg > 0 ) {
+                cout << endl << "Schopnost se stale nabiji" << endl;
+                cin >> menu;
+            }
+            
+            if (menu == 3) {
+
+                if (cls == 1) {
+                    cout << endl << "Aktivoval jsi schopnost Lion's final roar... Uzdravil jsi se o 40 zivotu a pristi 2 kola budes udelovat 3x poskozeni" << endl;
+                    hp = hp + 40; dm = 3;
+                    timeab = 3;  timeg = 5;
+                } else if (cls == 2) {
+                    cout << endl << "Aktivoval jsi schopnost Sparks of perfection... Toje mana byla obnovena na maximum a na pristi 3 kola budes udelovat 2x poskozeni" << endl;
+                    timeab = 4; mp = maxmp; dm = 2;  timeg = 5;
+                } else if (cls == 4) {
+                    cout << endl << "Aktivoval jsi schopnost True to my shape... Nepratele ti budou udelovat o 50% poskoteni mene na pristi 3 kola" << endl;
+                    timeab = 4; eddm = 0.5; timeg = 5;
+                }
+            } else if (menu == 1) {
+
+                hatk();
+                
+            } else if (menu == 2) {
+
+                latk();
+
+            }
+
+
+            } else if (cls == 3) {
+                cout << "Zacinas na tahu" << endl << endl << "Vyberte akci kterou chcete udelat:" << endl << "1) Heavy attack (Plny damage na 1 nepritele)" << endl << "2) Splash attack (0,4x damage na vsechny nepratele)" << endl;
+                cin >> menu;
+            while (menu != 1 && menu != 2) {
+                cout << endl << "zadejte platnou hodnotu" << endl;
+                cin >> menu;
+            }
+
+            if (menu == 1) {
+
+                hatk();
+
+            }else if (menu == 2) {
+
+                latk();
+
+            }
+
+
+            }
+            
+            cout << endl << "Nepritel je nini na tahu" << endl;
+            if(em == 1){
+                nahod();
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 2) {
+                nahod();
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod();
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            } else if (em == 3) {
+                nahod();
+                edmg = nahc * edmgmult1;
+                hp = hp - edmg;
+                nahod();
+                edmg = nahc * edmgmult2;
+                hp = hp - edmg;
+                hp = hp - edmg;
+                nahod();
+                edmg = nahc * edmgmult3;
+                hp = hp - edmg;
+                cout << endl <<"Vase nove zivoty... " << hp << endl;
+            }
+
+        }
+
+
+    }
+    if(ehp1 <= 0 || ehp2 <= 0 || ehp3 <= 0) {
+        mp == maxmp;
+        cout << "Vsichni nepratele byli porazeni... konec boje" << endl;
+        if (cls == 3) {
+            penizky();
+            cout << "Ziskal jste..." << penaze << " minci" << endl;
+        } else {
+            penizky();
+            if (penaze > 2) {
+                penizky();
+                cout << "Ziskal jste..." << penaze << " minci" << endl;
+            }else {
+                cout << "Demon bohuzel usebe nemel zadne penize" << endl;
+            }
+            
+        }
+    } else if (hp <= 0) {
+        cout << "Demon te srazil k zemi." << endl <<"Tvuj dech se zlomil, svet se rozmazal a bolest se rozlila tvym telem jako ohen." << endl << "Snazil jsi se zvednout, ale ruce te neposlouchaly." << endl;
+        cont();
+        cout << "Bylo pozde." << endl;
+        cont();
+        cout << "Kdyz se nad tebou demon sklonil, naposledy jsi videl jeho cervene oci — prazdne, hladove, bez jakekoliv emoce." << endl;
+        cont();
+        cout << "A pak prisla tma." << endl;
+        cont();
+        cout << "Ale v te tme jsi stale slysel svuj vlastni hlas." << endl << "Slaby, unaveny, ale jasny." << endl;
+        cont();
+        cout << "„Ja… ja jsem chtel odejit uz driv,“ problesklo ti hlavou." << endl;
+        cont();
+        cout << "„Chtel jsem to zkusit. Chtel jsem neco zmenit. Ale nikdy jsem se k tomu neodhodlal…“"<< endl;
+        cont();
+        cout << "Ticho." << endl << "Studene, nekonecne." << endl;
+        cont();
+        cout << "„A ted… ted vidim, ze to byla chyba.“" << endl;
+        cont();
+        cout << "Tvoje posledni myslenka nebyla o strachu." << endl << "Byla o litu." <<endl << "O tom, ze jsi mel odejit driv." << endl <<"O tom, ze jsi mel zkusit bojovat, i kdyz ostatni uz davno prestali." << endl;
+        cont();
+        cout << "A pak se svet kolem tebe rozpadl." << endl << "A s nim i posledni nadeje." <<endl;
+        cont();
+        cout << endl << endl << "„Padl posledni, kdo se jeste odvazil verit.“" << endl << "„Svet ztratil svou posledni jiskru.“" << endl;
+        cont();
+        exit(0);
+    }
+}
+
+
+
+
+
+void conqueror () {
+   cout << "--------------------------------" << endl << "Conqueror" << endl << "--------------------------------" << endl;
+   maxhp = 200; maxmp = 30; penize = 5; atk = 15; schopnost = 1;mp = maxmp; hp = maxhp;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Lion's roar... 3x poskozeni na dva tahy, +40 HP" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------"<< endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 1;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void arch () {
+   cout << "--------------------------------" << endl << "Arch" << endl << "--------------------------------" << endl;
+   maxhp = 120; maxmp = 100; penize = 8; atk = 18; schopnost = 2;mp = maxmp; hp = maxhp;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Sparks of perfection... 2x poskozeni na 3 tahy a doplneni many na max" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------"<< endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 2;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void persuader () {
+   cout << "--------------------------------" << endl << "Persuader" << endl << "--------------------------------" << endl;
+   maxhp = 100; maxmp = 20; penize = 30; atk = 8; schopnost = 3;mp = maxmp; hp = maxhp;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... Desire without a limit... Pasivni schopnost zvysujici sanci na zisk penez z monster z 50% na 100%" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------"<< endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 3;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void abomination () {
+   cout << "--------------------------------" << endl << "Abomination" << endl << "--------------------------------" << endl;
+   maxhp = 100; maxmp = 50; penize = 3; atk = 25; schopnost = 4;mp = maxmp; hp = maxhp;
+   cout << endl << "Max zivoty... " << maxhp << endl << "Max mana... " << maxmp << endl << "Penize... " << penize << endl << "Poskozeni... " << atk << endl << "Schopnost... True to my shape... 3 pristi tahy nepritele udeli o 50% mene poskozeni" << endl << endl << "1) Vybrat" << endl << "2) Zpet" << endl << endl << "--------------------------------" << endl;
+   cin >> menu;
+   switch (menu) {
+    case 1:
+    whil = 2;
+    cls = 4;
+    break;
+    case 2:
+    return;
+   }
+}
+
+void classmenu () {
+    while (whil == 1) {
+    int menu;
+    cout << "Jak se jemnujete... ";
+    cin >> jmeno;
+    cout << "--------------------------------" << endl << "Vyberte si jednu z class" << endl;
+        cout << "1) Conqueror" << endl << "2) Arch" << endl << "3) Persuader" << endl << "4) Abomination" << endl <<  endl << "5) Zpet" << "--------------------------------" << endl;
+        cin >> menu;
+
+        while(menu < 1 && menu > 5) {
+        cout << "zadejte platnou hodnotu" << endl;
+        cin >> menu;
+        }
+
+        switch (menu) {
+            case 1:
+            conqueror ();
+            break;
+
+            case 2:
+            arch ();
+            break;
+
+            case 3:
+            persuader ();
+            break;
+
+            case 4:
+            abomination ();
+            break;
+
+            case 5:
+            return;
+            break;
+        }
+}
+}
+
+int main () {
+
+    int menu;
+    
+
+    while (whil == 1) {
+    cout << "Vitejte v Saviour of Hope" << endl << "--------------------------------"<< endl;
+    cout << "1) Hrat" << endl << "2) Ukoncit" << endl << "--------------------------------" << endl;
+    cin >> menu;
+
+    while(menu != 1 && menu != 2) {
+        cout << "zadejte platnou hodnotu" << endl;
+        cin >> menu;
+    }
+    switch (menu) {
+        case 1:
+        classmenu ();
+        break;
+
+        case 2:
+        cout << "--------------------------------" << endl << "jste si jisti ze chcete kukoncit hru?" << endl << "1) Ukoncit" << endl << "2) Zpet" << endl << "--------------------------------" << endl;
+        cin >> menu;
+
+        while(menu != 1 && menu != 2) {
+        cout << "zadejte platnou hodnotu" << endl;
+        cin >> menu;
+    }
+
+    if (menu == 1) {
+            return 0;
+        }
+    }
+}
+    cout << endl << endl << endl << endl << "--------------------------------" << endl << "Kdysi byval svet plny svetla. Lide ovladali magii, rodili se se schopnostmi, ktere dokazaly menit beh dejin. Byli strazci rovnovahy, ochranci risi, posledni hrazi proti temnote. Ale kdyz se otevrel brany Pekelne rise, jejich sila nestacila.";
+    cout << endl << "Osmnactileta valka spalila vse" << endl << "Hrdinove padli, mesta se zmenila v ruiny, magie se vycerpala. Demonicti pani si rozdelili svet jako korist a jejich armady hlidaji kazdy kout zeme." << endl; 
+    cont();
+    cout << "A pak prislo to nejhorsi — ticho." << endl << "Ne boj, ne odpor. Jen ticho tech, kteri uz nemaji silu zvednout hlavu." << endl << "Lide se schovavaji v troskach, v jeskynich, v podzemnich tunelech. Neveri v navrat svetla. Vetsina z nich uz prijala, ze svet patri demonum. Ze nadeje byla jen pohadka pro deti. Ze hrdinove jsou mrtvi a magie je jen ozvena minulosti." << endl;
+    cout << endl << "Ale ty… ty jsi jiny." << endl << endl << "Ne proto, ze bys byl silnejsi. Ne proto, ze bys mel moc zmenit svet. Ale proto, ze ses odmitl vzdat. Protoze v tobe zustalo neco, co ostatni ztratili — presvedceni, ze i v popelu muze prezit jiskra." << endl << endl << "--------------------------------" << endl << endl;
+    cont();
+
+    cout << "Probudil jsi se s pocitem, jako by ti nekdo rozdrtil lebku kamenem." << endl << "Kocovina. Zase..." << endl << "V tomhle svete je to jedina vec, ktera jeste dokaze cloveka na chvili odtrhnout od reality." << endl << "Od toho, co z ni zustalo." << endl << endl;
+    cout << "Zvedl jsi se z provizorniho luzka, ktere vrzalo jako stara kost. Vzduch v ukrytu byl tezky, zatuchly, plny dychu lidi, kteri uz davno prestali zit a jen prezivaji." << endl << "Nekteri se smali. Takovy ten smich, co zni spis jako priznani porazky." << endl <<"Jini jen sedeli a koukali do zdi." << endl << "A ty... ty jsi se snazil vzpomenout, kolik jsi toho vlastne vypil. A proc." << endl;
+    cont();
+    cout << "Tenhle zivot te znechucoval. " << "„K cemu je zivot kdyz ho ani nemuzes zit,“ pomyslel sis." << endl;
+    cout << "Vyrazil jsi mezi ostatni a prezivci a zacal jsi se ptat na otazky jako, co se deje venku, jestli se nekdo jeste pokousi bojovat." << endl;
+    cout << "Odpovedi byly vzdycky stejne." << endl << "Kroutili hlavou. Rikali ti, ze venku neni nic, jen demoni, prach a smrt. Ze tady je to jedine misto, kde se da prezit. Ze nadeje je jen slovo, ktere uz nema zadny vyznam." << endl;
+    cont();
+    cout << "Tvoje otazky ale neuplne zapadly. Velitel ukrytu si te zavolal." << endl << "Sedel za starou deskou stolu, popraskanou a poskrabanou, jako by prezila vic bitev nez on sam. Kdyz jsi vstoupil, ani se na tebe nepodival." << endl;
+    cout << "„Ty chces odejit,“ pronesl klidne." << endl << "Chvili mlcel, jako by hledal slova, ktera uz davno ztratila silu." << endl;
+    cont();
+    cout << "„Nedelej to. Venku neni nic, co by stalo za to. Tady mas aspon sanci. Tam venku... tam venku jsi jen dalsi mrtvola, ktera jeste nevi, ze je mrtva.“" << endl << "Neodpovedel jsi. Nemusel jsi." << endl << "Videla to na tobe kazda vraska v jeho tvari." << endl;
+    cout << "Nakonec jen prikyvl. Pomalu, smutne, ale bez odporu." << endl;
+    cont();
+    cout << "Zvedl se a zasel do sve komory." << endl << " Ty jsi se taky zvedl a chstal jsi se odejit, kdyz vturanu se ozval krikot at pockas. Byl to velitel ukrytu nesouci ";
+    if (cls == 1) {
+        cout << "Greatsword of the blessed... dvojrucni mec se kterim bojoval velitel proti demonum behem Osmnactilete valky... Naviseni poskozeni: x1.00";
+    } else if (cls == 2){
+        cout << "Staff of sorrow... mocna kouzelna hul se kterou bojoval velitel proti demonum behem Osmnactilete valky... Naviseni poskozeni: x1.00, Naviseni many: x1.00";
+    }else if (cls == 3) {
+        cout << "Dreaded dagger... velice leskla dyka s obrovským krystalem na zacatku rukojeti, drive patrici tvemu otci ktery padl behem Osmnactilete valky... Naviseni poskozeni: x1.00";
+    }else if (cls == 4) {
+        cout << "Boxer of suffering... Velmi tezky boxer kradeny demonum Osmnactilete valky... Naviseni poskozeni: x1.00";
+    }
+
+    cout << endl << endl << "A tak jsi odesel. " << endl << "Do sveta, ktery uz nepatri lidem.";
+    cont();
+
+    cout << "Kdyz jsi vysel z ukrytu, cekal jsi spoust. Spalena zeme. Roztrhane stromy. Krev, kosti, popel." << endl << "Ale misto toho te uvitalo ticho. A svetlo." << endl;
+    cout <<  "Slunce se opiralo do zemi, jako by se snazilo predstirat, ze je vsechno v poradku. Trava se na nekterych mistech dokonce drzela pri zivote, zelena a tvrda, jako by se odmitala vzdat. Vzduch byl cisty, nezvykle klidny. Na okamzik jsi mel pocit, ze tohle misto snad ani nepatri do toho sameho sveta, ktery jsi opustil." << endl;
+    cont();
+    cout << "Udelal jsi par kroku dal, pomalu, opatrne, jako bys nechtel ten klid vyplašit. A pak te to napadlo." << endl << "„Tohle… vypada hezky,“ problesklo ti hlavou." << endl << "„Vubec ne tak, jak jsem si to predstavoval.“" << endl;
+    cont();
+    cout << "Byla to pravda. A mozna prave proto to bylo spatne." << endl << "Ten klid byl prilis cisty. Prilis tichy. Prilis… umely." << endl << "A pak se to stalo. " << endl;
+    cont();
+    cout << "Zleva se ozval zvuk, jako kdyz nekdo trha maso z kosti. Nizky, vlhky, nechutne pomaly." << endl << "Zastavil jsi se. Otočil jsi hlavu." << endl;
+    cont();
+    cout << "A tam stal on.  Prvni demon, ktereho jsi kdy videl z takove blizkosti." << endl;
+    cont();
+    cout << "Nebyl obrovsky. Nebyl ani obrneny. Ale jeho telo bylo zkroucene, jako by ho nekdo poskladal z nespravnych casti."<< endl << " Kuze mu visela v pruzich, oci zarily cervenou, a z ust mu kapala cernota, ktera sycela, kdyz dopadla na zem." << endl;
+    cont ();
+    cout << "A hlavne — dival se primo na tebe." << endl;
+    cont ();
+    cout << "A v tu chvili ti doslo, ze ten svet venku neni hezky." << endl << "Jen cekal, az udelas prvni chybu.";
+    cont();
+
+    boss = 0; em = 1; ej1 = "Artemis"; el1 = 1; ehp1 = 40; edmgmult1 = 1;
+    combat();
+
+    cout << "Stojis nad mrtvym telem demona a snazis se popadnout dech." << endl;
+    cout << "Bylo to tezke. Tezsi, nez sis chtel priznat." << endl;
+    cout << "Ruce se ti tresou, ale prezil jsi." << endl;
+    cont();
+    cout << "Nesmis se zastavit. Ne ted." << endl;
+    cont();
+    cout << "Setres krev z obleceni a podivas se na popraskanou cestu pred sebou." << endl;
+    cout << "Ta vede do dalsi vesnice." << endl;
+    cout << "Do dalsi nejistoty. Do dalsiho nebezpeci." << endl;
+    cont();
+    cout << "A presto vykrocis. Protoze ted uz vis, ze dokazes prezit." << endl;
+    cont();
+    cout << "Po dlouhe ceste se pred tebou konecne objevi prvni vesnice." << endl;
+    cout << "Je ticha. Az prilis ticha." << endl;
+    cout << "Domy vypadaji opustene, nektere jsou zborene a jine drzi pohromade jen silou vule." << endl;
+    cout << "Na ceste lezi stary vozik, prevraceny a zarostly mechem." << endl;
+    cont();
+    cout << "Vesnice pusobi mrtve, ale mas pocit, ze te nekdo sleduje." << endl;
+    cout << "Kazdy krok zni hlasiteji, nez by mel." << endl;
+    cout << "Vitr rozezvoni volne visici okenice a ty se rozhlizis kolem." << endl;
+    cont();
+    cout << "Tady by mohli byt lide... nebo neco jineho." << endl;
+    cout << "Musis zjistit, jestli tu nekdo prezil." << endl;
+    cont();
+    do {
+    cout << "----- Vyber kde se muze hledat -----" << endl << "1) Pozustatky radnice" << endl << "2) Za stromem napravo" << endl << "3) V hospodě" << endl << "4) V kostele" << endl << endl;
+    cin >> menu;
+    while(menu > 4 || menu < 1) {
+        cout << "zadejte platnou hodnotu" << endl;
+        cin >> menu;
+    }
+    if (menu == 1) {
+        cout << "Pred tebou se nachazi spici demon spici demon... muzes ho probudit a bojovat s nim nebo odejit" << endl <<"1) Bojovat" << endl <<"odejit" << endl;
+        cin >> menu;
+        while(menu > 2|| menu < 1) {
+            cout << "zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+        if (menu == 1) {
+            boss = 0; em = 1; ej1 = "Kael"; el1 = 1; ehp1 = 50; edmgmult1 = 1,2;
+            combat();
+ 
+        }
+    } else if (menu == 2) {
+        cout << "Nasel jsi kliku na strome. Pote co si za ni zatahl tak se otevreli dvere a za nima byl zebrik... Chces vstoupit?" << endl << "1) Slizt po zebriku" << endl << "2) Odejit" << endl;
+         cin >> menu;
+        while(menu > 2|| menu < 1) {
+            cout << "zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+        if (menu == 1) {
+            dal = 1;
+ 
+        }
+
+    } else if (menu == 3) {
+        cout << "Nasel jsi tam par drobaku, ale nikde nic" << endl;
+        cout << "Ziskal jste..." << 3 << " mince" << endl;
+    } else {
+        cout << "Otevres vrzajici dvere kostela a vstoupis dovnitr." << endl;
+    cout << "Okamzite te zasahne pach smrti." << endl;
+    cout << "Pred tebou lezi hromada mrtvol, rozhazena po celem kamennem podlazi." << endl;
+    cout << "Ticho je dusive, jako by i zdi vedely, co se tu stalo." << endl;
+    cont();
+    cout << "V hlave ti probleskne jedina myslenka." << endl;
+    cout << "\"Jak zvraceny je tenhle svet...\"" << endl;
+    }
+}while (dal =! 1);
+
+    cout << "Pomalu otevres dvere a sesupes se po uzke drevene siri dolu." << endl;
+    cout << "Pod stromem je maly ukryt, osvetleny slabymi lampami." << endl;
+    cout << "A tam... tam konecne vidis prezivsi." << endl;
+    cont();
+    cout << "Chvili na ne jen koukas a v hlave ti probleskne myslenka:" << endl;
+    cout << "\"Tohle je fakt divne... kdo by sakra delal ukryt ve strome?\"" << endl;
+    cont();
+    cout << "Chvili jen stojiš uprostred ukrytu a rozhlizis se kolem." << endl;
+    cout << "Teprve ted ti dochazi, ze tenhle ukryt je opravdu ve stromu." << endl;
+    cout << "\"Tohle misto je fakt zvlastni...\" zamumlas pro sebe." << endl;
+    cont();
+    cout << "Zhluboka se nadechnes a rozhodnes se porozhlednout." << endl;
+    cout << "Je tu par lidi, kteri by ti mohli rict vic o tom, co se tu stalo." << endl;
+    cout << "Vydas se za nimi, jeden po druhem." << endl;
+    cont();
+    cout << "Prvni clovek, ktereho potkas, je unaveny muz opirajici se o stenu." << endl;
+    cout << "\"Jsi novy?\" zepta se chraplave. \"Venku je to peklo. Bud rad, ze jsi to prezil.\"" << endl;
+    cout << "Muz ti rekne jen par slov, ale z jeho hlasu citis, ze uz davno ztratil nadeji." << endl;
+    cont();
+    cout << "Druha je mlada zena, ktera sedi u maleho ohniste." << endl;
+    cout << "\"Demoni tu byli pred dvema dny,\" rekne ti. \"Schovali jsme se sem.\"" << endl;
+    cout << "\"Jestli chces jit dal, budes potrebovat vic nez stesti.\"" << endl;
+    cont();
+    cout << "Nakonec narazis na barmana, ktery cisti sklenici, jako by byl v normalni hospode." << endl;
+    cout << "\"No nazdar, cestovateli,\" usmeje se unavene. \"Vypadas, ze jsi toho zazil dost.\"" << endl;
+    cout << "\"Jestli chces prezit dalsi den, mam tu neco specialniho.\"" << endl;
+    cont();
+    cout << "\"Lektvar oziveni. Tri zlaty. Nic levnejsiho ti zivot nezachrani.\"" << endl;
+    cout << "Barman na tebe mrkne a ceka na tvoji odpoved." << endl << endl << "1) Koupit lektvar oziveni" << endl <<"2) odmitnout" << endl;
+    cin >> menu;
+    while(menu > 2|| menu < 1) {
+            cout << "zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+    if (menu == 1) {
+        cout << "Vytahnes tri zlaty a poloziš je na bar." << endl;
+        cout << "Barman se usmeje, jako by uz dlouho cekal, ze to udelas." << endl;
+        cout << "\"Dobra volba,\" rekne a poda ti malou lahvicku se zelenym obsahem." << endl;
+        cont();
+        cout << "\"Tenhle lektvar te plne uzdravi. Mozna jen jednou te to zachrani, ale nekdy je i jednou dost.\"" << endl;
+        cout << "Schovas lahvicku do kapsy a barman ti pokyne hlavou." << endl;
+        cout << "\"Hodně stesti, cestovateli. Budes ho potrebovat.\"" << endl;
+        hp = maxhp;
+        cout << endl << "Tve zivote byli plne obnoveny" << endl << endl;
+    } else {
+        cout << "Zavrtis hlavou a das ruce od sebe." << endl;
+        cout << "\"Ne?\" barman se na tebe podiva, jako bys prave rekl neco opravdu zvlastniho." << endl;
+        cout << "\"Tvoje volba,\" zamumla a poklepe na lahvicku." << endl;
+        cout << "\"Ale venku to neni zadna prochazka. Jednou budes litovat, ze jsi tohle nechtel.\"" << endl;
+        cout << "Barman si povzdechne a vrati se k cisteni sklenice." << endl;
+        cout << "\"Tak aspon prezij dalsi den, jo? Svet uz jich moc nema.\"" << endl;
+    }
+
+    cout << "Po rozhovorech s mistnimi se vydas zpet ke schodum vedoucim nahoru." << endl;
+    cout << "Naposledy se rozhlidnes po ukrytu ve strome. Je to zvlastni misto, ale dalo ti odpovedi." << endl;
+    cont();
+    cout << "Pomalu vystoupas nahoru a otevres drevene dvere ve kmenu." << endl;
+    cout << "Venku te privita chladny vzduch a ticho opustene vesnice." << endl;
+    cont();
+    cout << "\"Cas jit dal,\" zamumlas pro sebe a vykrocis na cestu." << endl;
+    cout << "Pred tebou lezi dalsi krajina, dalsi nebezpeci a mozna i dalsi nadeje." << endl;
+    cont();
+    cout << "Opustis vesnici a vydas se dal po stare, popraskane ceste." << endl;
+    cout << "Krajina kolem je ticha, jen vitr obcas zvedne prach." << endl;
+    cout << "Po par minutach si vsimnes pohybu mezi stromy." << endl; 
+    cont();
+    cout << "Z krovi se vyriti dalsi monstrum, tentokrat vetsi a rychlejsi." << endl;
+    cout << "Zarve a vrhne se na tebe." << endl;
+    cout << "Tvuj boj zacina znovu." << endl;
+    boss = 0; em = 1; ej1 = "Haru"; el1 = 1; ehp1 = 65; edmgmult1 = 1;
+    combat();
+    cout << "Po narocnem souboji monstrum konecne padne k zemi." << endl;
+    cout << "Jsi unaveny, ale stale na nohou." << endl;
+    cout << "\"Tohle se jen tak nezlepsi...\" zamumlas pro sebe." << endl;
+    cont();
+    cout << "Pokracujes dal a po chvili slysis krik." << endl;
+    cout << "Rozbehnes se tim smerem a uvidis zenu, na kterou utoci demon." << endl;
+    cout << "Je zahnaná do kouta, brani se klackem, ale dlouho nevydrzi." << endl;
+    cont();
+    cout << "Mas dve moznosti: zachranit ji, nebo ji opustit a pokracovat dal." << endl;
+    cout << "Rozhodnuti je jen na tobe." << endl;
+    cout << "1) Zachranit" << endl << "2) Ignorovat" << endl;
+    cin >> menu;
+    while(menu > 2|| menu < 1) {
+            cout << "zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+    if (menu == 1) {
+        boss = 0; em = 1; ej1 = "Björn"; el1 = 2; ehp1 = 55; edmgmult1 = 2;
+        combat();
+        cout << "\"Dekuji... dekuji ti...\" vydechne slabe." << endl;
+    cout << "\"Nezachranil jsi jen muj zivot, ale dal jsi mi nadeji.\"" << endl;
+    cont();
+    cout << "Zena ti poda maly pytlik." << endl;
+    cout << "\"Vem si to... jsou to moje uspory. Patnact minci. Ty je vyuzijes lip nez ja.\"" << endl;
+    cont();
+    cout << "Kdyz se ji podivas do oci, pochopis, ze je na tom hur, nez se zdalo." << endl;
+    cout << "Jeji dech se zpomaluje a nakonec se zastavi." << endl;
+    cout << "Zustanes tam chvili stat v tichu." << endl;
+    cont();
+    cout << "Potom se otocis a vydas se smerem k vedlejsi vesnici." << endl;
+    cout << "Cesta pokracuje." << endl;
+    cont();
+
+    } else {
+        cout << "Zastavis se, ale nakonec se rozhodnes nezasahovat." << endl;
+    cout << "Otočíš se a pokracujes po ceste dal, aniž by ses ohlizel." << endl;
+        cont();
+        cout << "Jeji krik postupne utichne a nahradi ho ticho lesa." << endl;
+    cout << "V hlave ti to zni jeste dlouho, ale nohy te nesou dal." << endl;
+    cont();
+    cout << "Nakonec dorazis na rozcesti vedouci k vedlejsi vesnici." << endl;
+    cout << "Bez ohlizeni pokracujes v ceste." << endl;
+    cont();
+    }
+
+    cout << "Po dlouhe ceste se pred tebou objevi dalsi vesnice." << endl;
+    cout << "Domy jsou stare, popraskane a nektere vypadaji, jako by se mely kazdou chvili zritit." << endl;
+    cont();
+    cout << "\"Tak jsem tu... dalsi vesnice, dalsi otazky,\" zamumlas pro sebe." << endl;
+    cout << "Vydas se pomalu dal, pripraveny na cokoliv, co te tu muze cekat." << endl;
+    cont();
+    cout << "Kdyz vstoupis do nove vesnice, vsimnes si neceho jineho nez minule." << endl;
+    cout << "Uprostred vesnice stoji provizorni opevneni, osvicene pochodnemi." << endl;
+    cout << "Na rozdil od predchozi vesnice je tu zivot, hlasy a pohyb." << endl;
+    cont();
+    cout << "Vydas se smerem k opevneni a rozhlizis se kolem." << endl;
+    cout << "Lide te sleduji, ale nikdo nic nerika. Jsi tu cizi." << endl;
+    cont();
+    cout << "Narazis do urozene vypadajiciho muze, ktery ma na zadech kladivo." << endl;
+    cout << "Je to kovar. Podiva se na tebe a hned pozna, ze nejsi mistni." << endl;
+    cont();
+    cout << "\"Ty nejsi odsud,\" zamrci. \"Jestli chces prezit, muzu ti prodat nejake vybaveni.\"" << endl;
+    cout << "Mas dve moznosti: prijmout jeho nabidku, nebo ji odmitnout." << endl << endl;
+    cout <<"1) Prijmout" << endl << "Odmitnout" << endl;
+    
+    cout << "Prikynes a reknes, ze mas zajem o vybaveni." << endl;
+    cout << "Kovar se usmeje, tentokrat trochu pratelskyji." << endl;
+    cont();
+    cout << "\"Dobra volba. Mam tu brneni z tvrde kuze. Vydrzi vic, nez vypada.\"" << endl;
+    cout << "Ukaze ti tmave hnede brneni, posilene kovovymi nity." << endl;
+    cont();
+    cout << "\"Jestli ho chces, muzu ti ho prodat hned.\"" << endl << endl;
+    if (penize < 10) {
+        cout << "Nemas na to dost penez" << endl;
+        cont();
+        cout << "Zavrtis hlavou a odmitnes jeho nabidku." << endl;
+        cout << "Kovar si odfrkne a zamraci se." << endl;
+        cont();
+        cout << "\"Jak chces,\" procedi skrz zuby. \"Ale pak si nestezuj, az te neco sezere.\"" << endl;
+        cout << "Otočí se zpatky ke svemu stolu a dal si te nevsima." << endl;
+        cont();
+    } else {
+        cout << "1) Koupit (-10 minci)" << endl << "2) odmitnout" << endl;
+
+        cin >> menu;
+    while(menu > 2|| menu < 1) {
+            cout << "zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+    if (menu == 1) {
+        cout << "Kovar se usmeje, kdyz reknes, ze si brneni chces koupit." << endl;
+        cout << "\"Dobra volba,\" zamrci spokojene. \"Tohle brneni z tvrde kuze ti nekolikrat zachrani krk.\"" << endl;
+        cont();
+        cout << "Zvedne ho ze stolu a poda ti ho obema rukama." << endl;
+        cout << "\"Neni to zadna slava, ale vydrzi vic, nez bys cekal. A hlavne te nezpomaly jako kov.\"" << endl;
+        cont();
+        cout << "Kovar prikyne a doda: \"Nos ho s rozumem. Venku se ti bude hodit kazdy kousek ochrany.\"" << endl;
+        penize = penize - 10; maxhp = maxhp + 25;
+        cout << "Penize..." << penize << "Max. zivoty..." << maxhp << endl;
+        cont();
+
+    }else {
+        cout << "Zavrtis hlavou a odmitnes jeho nabidku." << endl;
+        cout << "Kovar si odfrkne a zamrači se." << endl;
+        cont();
+        cout << "\"Jak chces,\" procedi skrz zuby. \"Ale pak si nestezuj, az te neco sezere.\"" << endl;
+        cout << "Otoci se zpatky ke svemu stolu a dal si te nevsima." << endl;
+        cont();
+    }
+    }
+
+    cout << "Kdyz odchazis od kovare, vzpomenes si, ze ses chtel podivat do mistni hospody." << endl;
+    cout << "Vydas se tedy ulici, dokud neuvidis drevene dvere s vyvesenou lucernou." << endl;
+    cont();
+    cout << "Jakmile vstoupis dovnitr, narazis ramenem do opilce, ktery se potaci u vchodu." << endl;
+    cout << "Opilec se na tebe otoci s vyrazem plnym vzteku." << endl;
+    cout << "\"Hej! Kam se tlacis?!\" zarve a zvedne pesti." << endl;
+    cont();
+    cout << "Nez stihne uderit, ozve se hluboky hlas." << endl;
+    cout << "\"Dost!\" zahromi statny muz stojici za barem." << endl;
+    cout << "Opilec okamzite ztichne a ustoupi, jako by ho nekdo polil studenou vodou." << endl;
+    cont();
+    cout << "Hostinsky, obrovsky muz s rameny jako vrata, k tobe prijde a uklidni situaci." << endl;
+    cout << "\"Omlouvam se za nej. Je to tu bezne,\" rekne prekvapive milym tonem." << endl;
+    cout << "\"Vitej v nasem kempu, cestovateli.\"" << endl;
+    cont();
+    cout << "Posadi te k baru a chvili si s tebou povida o vesnici, o demonech a o tom, jak se tu preziva." << endl;
+    cout << "Nakonec pred tebe polozi malou lahvicku." << endl;
+    cout << "\"Lektvar uzdraveni. Mohl by se ti hodit. Chces ho koupit?\"" << endl;
+if (penize < 3) {
+    cout << "Pokroutis hlavou a tise reknes, ze na lektvar nemas penize." << endl;
+    cout << "Hostinsky se na tebe podiva a jeho drsny vyraz povoli." << endl;
+    cont();
+    cout << "\"Aha... tak to je horsi,\" zamumla soucitne." << endl;
+    cout << "\"Venku je to peklo. Nikdo by tam nemel chodit bez pomoci.\"" << endl;
+    cont();
+    cout << "Chvili si s tebou povida, tentokrat pomaleji a s pochopenim." << endl;
+    cout << "\"Kdybych mohl davat lektvary zadarmo, udelal bych to. Ale sam sotva drzim tenhle podnik nad vodou.\"" << endl;
+    cout << "\"Stejne... drzim ti palce. Snad se jeste uvidime.\"" << endl;
+    cont();
+    cout << "Podivas se na jeho sekeru a zeptas se, jestli by se k tobe nepridal." << endl;
+    cout << "Hostinsky se jemne usmeje, tentokrat skoro otcovsky." << endl;
+    cont();
+    cout << "\"Ne, chlapce... tohle uz neni moje cesta,\" rekne klidne." << endl;
+    cout << "\"Ale ty ji mas teprve pred sebou.\"" << endl;
+    cont();
+    cout << "\"Poslouchej... kdyz pujdes dal, drz se cest. Demoni miluji stiny a mista, kde je ticho az prilis hluboke.\"" << endl;
+    cout << "\"A kdyz budes muset bojovat, nikdy neustupuj zpet do kopce. To je chyba, kterou dela kazdy novacek.\"" << endl;
+    cont();
+    cout << "\"Nemuzu jit s tebou, ale muzu ti aspon dat radu. A ta nekdy stoji vic nez zlato.\"" << endl;
+    cont();
+} else {
+     cout << "1) Koupit (-3 mince)" << endl << "2) odmitnout" << endl;
+
+        cin >> menu;
+    while(menu > 2|| menu < 1) {
+            cout << "zadejte platnou hodnotu" << endl;
+            cin >> menu;
+        }
+    if (menu == 1) {
+        cout << "Prikynes a vytahnes penize." << endl;
+        cout << "Hostinsky se usmeje uprimne, az prekvapive teple." << endl;
+        cout << "\"Dobre rozhodnuti,\" rekne a poda ti lahvicku." << endl;
+        cout << "\"Tenhle lektvar uz zachranil vic zivotu, nez bych dokazal spocitat.\"" << endl;
+         hp = maxhp;
+        cout << endl << "Tve zivote byli plne obnoveny" << endl << endl;
+        cont();
+        cout << "Chvili si s nim jeste povidas. Je otevrenejsi, pratelstejsi a dokonce se i zasmeje." << endl;
+        cout << "\"Kdyz budes potrebovat dalsi pomoc, stav se. Nejsi tu nepritel.\"" << endl;
+        cout << "Jeho slova ti dodaji trochu nadeje." << endl;
+        cont();
+        cout << "Podivas se na jeho obrovskou sekeru a zeptas se, jestli by se k tobe nepridal na vyprave." << endl;
+        cout << "Hostinsky se pousmeje, tentokrat smutne a pokorne." << endl;
+        cont();
+        cout << "\"Ne, pritelu... ty casy jsou davno pryc,\" rekne tise." << endl;
+        cout << "\"Drive jsem bojoval. A hodne. Az prilis.\"" << endl;
+        cont();
+        cout << "Pohladí rukou topurko sve sekery, jako by vzpominal na neco, co uz nechce videt." << endl;
+        cont();
+        cout << "\"Ted uz jen hlidam tohle misto. A lidi, kteri tu zustali.\"" << endl;
+        cout << "\"Ale ty... ty mas pred sebou cestu. A ja ti preju, at ji dojdes.\"" << endl;
+        cont();
+    } else {
+        cout << "Zavrtis hlavou a reknes, ze o lektvar nestojis." << endl;
+        cout << "Hostinsky jen kratce prikyne, ale jeho usmev trochu pohasne." << endl;
+        cout << "\"Jak chces. Jen doufam, ze vis, co delas,\" zamumla." << endl;
+        cont();
+        cout << "Chvili si jeste povidate, ale rozhovor je kratky a hostinsky pusobi uzavreneji." << endl;
+        cout << "\"Preju ti stesti na ceste,\" rekne nakonec a vrati se k praci." << endl;
+        cont();
+        cout << "Podivas se na jeho obrovskou sekeru a zeptas se, jestli by se k tobe nepridal na vyprave." << endl;
+        cont();
+        cout << "Zeptas se hostinskeho, jestli by se k tobe nepridal na vyprave." << endl;
+        cout << "Hostinsky se narovna a jeho vyraz ztvrdne." << endl;
+        cont();
+        cout << "\"Ne. To nepude,\" rekne kratce." << endl;
+        cout << "\"Mam tu sve povinnosti. A ty mas svou cestu.\"" << endl;
+        cont();
+        cout << "Jeho ton neni nepratelsky, ale jasne dava najevo, ze rozhovor tim konci." << endl;
+        cout << "\"Hodne stesti, cestovateli,\" doda uz odmerene." << endl;
+        cont();
+    }
+}
+
+    cout << "Po rozhovoru s hostinskym se zvednes z barove stoličky." << endl;
+    cout << "Hostinsky ti naposledy prikyne hlavou, tentokrat klidne a bez napeti." << endl;
+    cont();
+    cout << "Opilec, do ktereho jsi drkl pri prichodu, sedi ted v rohu a ani se na tebe nepodiva." << endl;
+    cout << "Atmosfera v hospode se uklidnila a ty zamiris ke dverim." << endl;
+    cont();
+    cout << "Kdyz vyjdes ven, privita te chladny nocni vzduch." << endl;
+    cout << "Pochodne kolem opevneni stale hori a vrhaji dlouhe stiny po cele vesnici." << endl;
+    cont();
+    cout << "\"Cas jit dal,\" zamumlas pro sebe a vykrocis smerem k vychodu z vesnice." << endl;
+    cout << "Pred tebou lezi dalsi cesta, dalsi nebezpeci a dalsi otazky bez odpovedi." << endl;
+    cont();
+    cout << "Opustis vesnici a nechavas za sebou svetlo pochodni." << endl;
+    cout << "Cesta pred tebou je temna a ticha, jen vitr se prohani mezi stromy." << endl;
+    cout << "Kroky zni hlasiteji, nez bys chtel." << endl;
+    cont();
+    cout << "Po par minutach mas pocit, ze nejsi sam." << endl;
+    cout << "Z houstiny se ozve nizke zavrčení." << endl;
+    cont();
+    cout << "Z krovi vyskoci demon a vrhne se na tebe." << endl;
+    boss = 0; em = 1; ej1 = "Kael"; el1 = 1; ehp1 = 50; edmgmult1 = 1,2;
+    combat();
+    cout << "Po kratkem, ale intenzivnim boji padne k zemi." << endl;
+    cont();
+    cout << "\"Tohle bylo tesne...\" zamumlas a otreses se." << endl;
+    cout << "Vydas se dal po ceste, i kdyz mas pocit, ze te sleduji dalsi oci." << endl;
+    cont();
+    cout << "Cesta se zuzuje a stromy se sklani nad cestou jako temne stiny." << endl;
+    cout << "Najednou se pred tebou objevi dva demoni najednou." << endl;
+    cout << "Zarvou a vrhnou se na tebe ze dvou stran." << endl;
+    boss = 0; em = 2; ej1 = "Artemis"; el1 = 1; ehp1 = 40; edmgmult1 = 1; ej2 = "Artemis"; el2 = 1; ehp2 = 40; edmgmult2 = 1;
+    combat();
+    cout << "Boj je dlouhy a vycerpavajici, ale nakonec oba padnou." << endl;
+    cont();
+    cout << "Zadychas se a otreses krev ze zbrane." << endl;
+    cout << "\"Tohle zacina byt horsi a horsi...\"" << endl;
+    cont();
+    cout << "Kdyz se setmi, rozhodnes se prenocovat v lese." << endl;
+    cout << "Nedeláš ohen, aby ses neprozradil. Tma je hustá a neprijemna." << endl;
+    cout << "Sedis oprety o strom a poslouchas kazdy zvuk kolem sebe." << endl;
+    cont();
+    cout << "Noc je dlouha, ale nakonec se dockas svitania." << endl;
+    cout << "Jsi unaveny, ale naživu." << endl;
+    cont();
+    cout << "Za svitania se zvednes a vydas se dal." << endl;
+    cout << "Cesta je klidna, ale stale mas pocit, ze te nekdo sleduje." << endl;
+    cout << "Po nekolika hodinach chuze se pred tebou objevi silueta dalsi vesnice." << endl;
+    cont();
+    cout << "\"Konecne...\" vydechneš a zamiris k branam." << endl;
+    cont();
+    cout << "Dorazis do dalsi vesnice, ktera je obehnuta drevenymi barikadami." << endl;
+    cout << "Pochodne kolem opevneni hori jasnym svetlem a vrhaji dlouhe stiny." << endl;
+    cout << "Je jasne, ze tohle misto je ukrytem pred demony." << endl;
+    cont();
+    cout << "Kdyz vstoupis dovnitr, par mistnich muzu se k tobe okamzite rozbehne." << endl;
+    cout << "\"Stuj! Kdo jsi?!\" zakrici jeden z nich." << endl;
+    cont();
+    cout << "Po kratkem, ale prudkem stretu je odzbrojis a oni ustoupi." << endl;
+    cout << "\"Dobře... nejsi nepritel,\" zamumla jeden z nich." << endl;
+    cont();
+    cout << "Zamiris do mistniho hostince, odkud se ozyva hluk." << endl;
+    cout << "Jakmile vstoupis, hostinsky, obrovsky muz s obri sekerou, se k tobe otoci." << endl;
+    cout << "\"Ty nejsi odsud,\" zavrci a vrhne se na tebe." << endl;
+    cont();
+    cout << "Po kratkem, ale intenzivnim boji ho srazis na kolena." << endl;
+    cout << "Hostinsky se zvedne, oprasi se a zasměje se." << endl;
+    cout << "\"Mas silu. To se mi libi.\"" << endl;
+    cont();
+    cout << "Jsi trochu zmaten z teto interakce, ale nechas to bit" << endl;
+    cout << "\"Mam tu lektvar oziveni. Chces ho koupit?\"" << endl;
+    if (penize >= 4) {
+    cout << endl << "1) Prijmout (-4 mince)" << endl << "2) Odmitnout" << endl;
+    cin >> menu;
+    while (menu > 2 || menu < 1) {
+        cout << "Neplatna hodnota" << endl;
+        cin >> menu;
+    }
+    if (menu == 1) {
+        penize = penize - 4;
+        cout << "Prikynes a vytahnes penize." << endl;
+        cout << "Hostinsky se usmeje uprimne." << endl;
+        cout << "\"Dobra volba. Tenhle lektvar ti muze zachranit zivot.\"" << endl;
+        cout << "Poda ti lahvicku a opre se o bar." << endl;
+        cont();
+    } else if (menu == 2) {
+        cout << "Zavrtis hlavou a reknes, ze o lektvar nestojis." << endl;
+        cout << "Hostinsky jen pokrci rameny." << endl;
+        cout << "\"Tvoje volba.\"" << endl;
+        cont();
+    }
+    } else {
+        cout << "Zavrtis hlavou a reknes, ze o lektvar nestojis." << endl;
+        cout << "Hostinsky jen pokrci rameny." << endl;
+        cout << "\"Tvoje volba.\"" << endl;
+        cont();
+    }
+    cout << "Po chvili se hostinsky nakloni bliz." << endl;
+    cout << "\"Hele... potrebovali bychom pomoc.\"" << endl;
+    cont();
+    cout << "\"Jeden demon se potlouka nedaleko a nase hlidky ho nedokazou sundat.\"" << endl;
+    cout << "\"Pomuzes nam?\"" << endl;
+    cout << endl << "1) Prijmout (4  zlate)" << endl << "2) Odmitnout" << endl;
+    cin >> menu;
+    while (menu > 2 || menu < 1) {
+            cout << "Neplatna hodnota" << endl;
+            cin >> menu;
+        }
+if (menu == 1) {
+    cout << "Prikynes a reknes, ze pomuzes." << endl;
+    cout << "Hostinsky se usmeje s ulevou." << endl;
+    cout << "\"Dobre. Jdi za nasimi scauty. Ukazou ti, kde se ten parchant schovava.\"" << endl;
+    cont();
+    cout << "Scauti te zavedou do lesa, kde se demon ukryva." << endl;
+    boss = 1; em = 1; ej1 = "Qingshan"; el1 = 3; ehp1 = 100; edmgmult1 = 1,4;
+    combat();
+    cout << "Po narocnem boji ho porazis a vratis se do vesnice." << endl;
+    cont();
+    cout << "Hostinsky ti poda dve helmy." << endl;
+    cout << "\"Vyber si odmenu: Helmet of the King nebo Sorrow Helmet.\"" << endl;
+    cout << "1) Helmet of the King (+ 20 max zivotu)" << endl << "2)Sorrow Helmet (+ 30 max many)" << endl;
+    cin >> menu;
+        while (menu > 2 || menu < 1) {
+                cout << "Neplatna hodnota" << endl;
+                cin >> menu;
+            }
+    if (menu == 1) {
+        maxhp = maxhp + 20;
+        hp = maxhp;
+    } else if (menu == 2) {
+        maxmp = maxmp + 30;
+        mp = maxmp;
+    }
+    cout << "K tomu ti da i lektvar uzdraveni." << endl;
+    cout << "\"Zaslouzils sis to.\"" << endl;
+    hp = maxhp;
+    cont();
+
+
+} else if (menu == 2) {
+    cout << "Zavrtis hlavou a omluvis se." << endl;
+    cout << "\"Promin... uz takhle riskuju dost.\"" << endl;
+    cont();
+    cout << "Hostinsky jen prikyne." << endl;
+    cout << "\"Chapu. Ne kazdy muze bojovat.\"" << endl;
+    cout << "\"Stejne ti preju stesti na ceste. Budes ho potrebovat.\"" << endl;
+}
+
+    cout << "Opustis vesnici a nechavas za sebou svetlo pochodni." << endl;
+    cout << "Cesta pred tebou je ticha, jen vitr se prohani mezi stromy." << endl;
+    cout << "Kroky zni v noci az neprirozene hlasite." << endl;
+    cont();
+    cout << "Kdyz prochazis kolem stareho stromu, vsimnes si, ze jeho stin se hybe jinak nez ostatni." << endl;
+    cout << "Zastavis se. Stin se zacne natahovat po zemi smerem k tobe." << endl;
+    cout << "A pak z nej vyroste demon, jako by se zrodil primo z tmy." << endl;
+    cont();
+    cout << "Vrhe se na tebe bez varovani a boj zacina." << endl;
+    boss = 0; em = 1; ej1 = "Artemis"; el1 = 1; ehp1 = 40; edmgmult1 = 1;
+    combat();
+    cont();
+    cout << "Po kratkem, ale divokem souboji padne k zemi a stin se rozplyne." << endl;
+    cout << "\"Tohle bylo nove...\" zamumlas." << endl;
+    cont();
+    cout << "Jdes dal a snazis se udrzet pozornost na okoli." << endl;
+    cout << "Tentokrat slysis kroky za sebou." << endl;
+    cout << "Otočíš se — a demon uz bezi primo na tebe." << endl;
+    boss = 0; em = 1; ej1 = "Kael"; el1 = 1; ehp1 = 50; edmgmult1 = 1,2;
+    combat();
+    cont();
+    cout << "Tentokrat jsi rychlejsi. Po par uhybech a uderech demon padne." << endl;
+    cout << "\"Dalsi z cesty...\"" << endl;
+    cont();
+    cout << "Kdyz si myslis, ze mas na chvili klid, ozve se z prava hluboke vrčení." << endl;
+    cout << "Z houstiny vyskočí dalsi demon, tentokrat vetsi a agresivnejsi." << endl;
+    boss = 0; em = 1; ej1 = "Varg"; el1 = 3; ehp1 = 75; edmgmult1 = 1,5;
+    combat();
+    cont();
+    cout << "Kdyz se setmi, rozhodnes se prenocovat v lese." << endl;
+    cout << "Ohen si neudelas, aby ses neprozradil. Tma je hustá a neprijemna." << endl;
+    cout << "Sedis oprety o strom a poslouchas kazdy zvuk." << endl;
+    cont();
+    cout << "Noc je dlouha, ale nakonec se dockas svitania." << endl;
+    cout << "Jsi unaveny, ale stale naživu." << endl;
+    cont();
+    cout << "Za svitania se zvednes a vydas se dal." << endl;
+    cout << "Cesta je klidna, ale stale mas pocit, ze te nekdo sleduje." << endl;
+    cont();
+    cout << "Po hodinach chuze lesem dorazis na male prostranstvi, kde by podle mapy mela byt dalsi vesnice." << endl;
+    cout << "Ale nic tu neni. Zadny dum, zadna barikada, zadne svetlo." << endl;
+    cont();
+    cout << "Jen ticho. A par stop v blate." << endl;
+    cout << "\"Takze tu nekdo byl... ale kde jsou ted?\"" << endl;
+    cont();
+    cout << "Prochazis okolim a vsimnes si rozhazeneho dreva, zbytku ohniste a par kusu roztrhane latky." << endl;
+    cout << "Vse vypada cerstve, jako by lide odesli teprve pred chvili." << endl;
+    cont();
+    cout << "Jdes dal do lesa a vsimnes si, ze stopy vedou mimo cestu." << endl;
+    cout << "Sledujes je, az dorazis k velkemu balvanu porostlemu mechem." << endl;
+    cout << "Na prvni pohled nic zvlastniho." << endl;
+    cont();
+    cout << "Pak si ale vsimnes, ze mech je na jedne strane odhrnuty." << endl;
+    cout << "A pod nim... drevena dvirka." << endl;
+    cout << "\"Takze ukryt neni ve vesnici... ale tady, uprostred prirody,\" zamumlas." << endl;
+    cont();
+    cout << "Chvili poslouchas. Zpod dveri se ozyvaji tlumene hlasy." << endl;
+    cout << "Konecne jsi nasel, kde se lide skryvaji." << endl;
+    cont();
+    cout << "Chytis za kovovou rukojet a pomalu otevres dvere do podzemniho ukrytu." << endl;
+    cont();
+
+    cout << "Pomalu sestupujes po drevenych schodech do podzemniho ukrytu." << endl;
+    cout << "Jakmile se dostanes dolu, uvidis skupinu lidi, kteri se okamzite otoci tvym smerem." << endl;
+    cont();
+    cout << "Na rozdil od predchozich ukrytu se jejich tvare rozzari ulevou." << endl;
+    cout << "\"Nekdo novy!\" zvola jeden z nich." << endl;
+    cout << "\"Konecne dalsi prezivsi!\"" << endl;
+    cont();
+    cout << "Atmosfera je pratelska, tepla, skoro neskutecna v tomhle svete." << endl;
+    cout << "Velitel ukrytu, starsi muz s klidnym pohledem, k tobe pristoupi." << endl;
+    cout << "\"Vitej mezi nami. Pokud potrebujes pomoc, rekni.\"" << endl;
+    cont();
+    cout << "Po kratkem rozhovoru ti velitel polozi na stul lahvicku." << endl;
+    cout << "\"Muzu ti prodat lektvar oziveni. Hodne lidem uz zachranil zivot.\"" << endl;
+if (penize < 3) {
+    cout << "Sklonis hlavu a reknes, ze na lektvar nemas penize." << endl;
+    cout << "Velitel se na tebe podiva s pochopenim." << endl;
+    cont();
+    cout << "\"To je v poradku. Penize nejsou vse.\"" << endl;
+    cont();
+    cout << "\"Ale... mozna bys nam mohl pomoct.\"" << endl;
+    cout << "\"Jeden demon nam tu zabiji dobytek. Pokud ho porazis, dam ti lektvar zdarma.\"" << endl;
+    cout << endl << "1) Pomoct jim" << endl << "2) odmitnout" << endl;
+    cin >> menu;
+        while (menu > 2 || menu < 1) {
+                cout << "Neplatna hodnota" << endl;
+                cin >> menu;
+            }
+    if (menu == 1) {
+        cout << "Prikynes a reknes, ze jim pomuzes." << endl;
+        cont();
+        cout << "Velitel ti podekuje a ukaze smerem k lesu." << endl;
+        cout << "\"Ten demon se objevil tam. Dej si pozor.\"" << endl;
+        cont();
+        cout << "Po kratkem hledani narazis na demona, ktery trha zbytky dobytka." << endl;
+        cout << "Vrhe se na tebe a boj zacina." << endl;
+        boss = 1; em = 1; ej1 = "Qingshan"; el1 = 3; ehp1 = 100; edmgmult1 = 1,4;
+        combat();
+        penize = penize + 2;
+        cont();
+        cout << "Po tvrde bitve demon padne k zemi." << endl;
+        cout << "Vratis se do ukrytu a velitel ti poda lektvar." << endl;
+        cout << "\"Slibil jsem ti ho. A sliby se maji plnit.\"" << endl;
+        hp = maxhp;
+
+    } else if (menu == 2) {
+        cout << "Zavrtis hlavou a omluvis se." << endl;
+        cout << "\"Promin... ale uz takhle riskuju dost.\"" << endl;
+        cont();
+        cout << "Velitel jen smutne prikyne." << endl;
+        cout << "\"Chapu. Kazdy ma svou cestu.\"" << endl;
+        cont();
+    }
+
+
+} else {
+    cout << endl <<"1) Prijmout a koupit (-3)" << endl << "2) odmitnout" << endl;
+    cin >> menu;
+        while (menu > 2 || menu < 1) {
+                cout << "Neplatna hodnota" << endl;
+                cin >> menu;
+            }
+    if (menu == 1) {
+        penize = penize - 3;
+        cout << "Prikynes a vytahnes penize." << endl;
+        cout << "Velitel se usmeje." << endl;
+        cont();
+        cout << "\"Dobre rozhodnuti. Ver mi, budes rad, ze ho mas.\"" << endl;
+        cout << "Poda ti lahvicku a ukaze smerem ke kovari." << endl;
+        cout << "\"A ted jdi za nasim zbrojarem. Ma pro tebe neco specialniho.\"" << endl;
+        cont();
+    } else if (menu == 2) {
+        cout << "Zavrtis hlavou a reknes, ze o lektvar nestojis." << endl;
+        cout << "Velitel jen pokrci rameny." << endl;
+        cout << "\"Jak chces. Ale i tak by ses mel podivat za zbrojarem.\"" << endl;
+        cout << "\"Ma pro tebe nabidku, ktera by se ti mohla hodit.\"" << endl;
+        cont();
+    }
+    cout << "Zamiris ke zbrojari, ktery sedi u stolu plneho zbrani." << endl;
+    cout << "Zbrojar se na tebe podiva a pousmeje se." << endl;
+    cont();
+    cout << "\"Ty jsi ten novy, ze? Mam tu pro tebe dlouhou dyku.\"" << endl;
+    cout << "\"Je lehka, rychla a stoji osm minci.\"" << endl;
+    if (penize < 8) {
+        cout << "Sklonis hlavu a reknes, ze na dyku nemas penize." << endl;
+        cout << "Zbrojar jen pokrci rameny." << endl;
+        cout << "\"Skoda. Je dobra. Ale treba se sem jednou vratis.\"" << endl;
+        cont();
+    } else {
+        cout << endl << "1)Prijmes a koupis (-8 minci, +5 postkozeni)" << endl<< "2)odmitnes" << endl;
+        cin >> menu;
+        while (menu > 2 || menu < 1) {
+                cout << "Neplatna hodnota" << endl;
+                cin >> menu;
+            }
+    if (menu == 1) {
+        penize = penize - 8;
+        cout << "Prikynes a vytahnes osm minci." << endl;
+        cout << "Zbrojar se usmeje a poda ti dyku." << endl;
+        cout << "\"Pekna volba. Tahle ti zachrani krk vic nez jednou.\"" << endl;
+        atk = atk + 5;
+        cont();
+        
+    } else if (menu == 2) {
+        cout << "Zavrtis hlavou a reknes, ze dyku nechces." << endl;
+        cout << "Zbrojar prikyne." << endl;
+        cout << "\"Jak myslis. Kazdy ma svuj styl boje.\"" << endl;
+        cont();
+    }
+    }
+    
+}
+    cout << "Kdyz odchazis od zbrojare, zastavi te mladik." << endl;
+    cout << "Je hubeny, vyhubly, ale v ocich ma odhodlani." << endl;
+    cout << "\"Pane... mohl bych jit s vami? Chci bojovat proti demonum!\"" << endl;
+    cont();
+    cout << "Podivas se na nej a zavrtis hlavou." << endl;
+    cout << "\"Ne. Jsi prilis mlady. A prilis slaby.\"" << endl;
+    cont();
+    cout << "Mladik sklopi zrak, ale prikyne." << endl;
+    cout << "\"Rozumim... snad jednou budu silnejsi.\"" << endl;
+    cont();
+    cout << "Po rozhovoru s mistnimi se vydas zpet k drevenemu poklopu." << endl;
+    cout << "Lide ti naposledy zamavaji a popreji stesti." << endl;
+    cont();
+    cout << "\"Dik... budu ho potrebovat,\" zamumlas a vystoupas ven." << endl;
+    cont();
+    cout << "Znovu te privita chladny vzduch a ticho prirody." << endl;
+    cout << "Zavres poklop a vydas se dal po uzke lesni ceste." << endl;
+    cont();
+    cout << "Jdes lesem, kdyz si vsimnes, ze se listi na zemi zacina hybat." << endl;
+    cout << "Ne vetrem... ale zevnitr." << endl;
+    cont();
+    cout << "Zpod listi se vyhrabou dve temne siluety." << endl;
+    cout << "Dva demoni se zvednou, jako by se probouzeli ze spanku." << endl;
+    cont();
+    cout << "\"No skvele... dva najednou,\" procedis skrz zuby." << endl;
+    cout << "Oba se na tebe vrhnou a boj zacina." << endl;
+    boss = 0; em = 2; ej1 = "Kael"; el1 = 1; ehp1 = 50; edmgmult1 = 1,2; ej2 = "Kael"; el2 = 1; ehp2 = 50; edmgmult2 = 1,2;
+    combat();
+    cont();
+    cout << "Po tvrde bitve oba padnou k zemi a les se opet uklidni." << endl;
+    cout << "\"Tohle bylo hnusne...\"" << endl;
+    cont();
+    cout << "Pokracujes dal, ale klid netrva dlouho." << endl;
+    cout << "Tentokrat slysis praskani vetvi nad sebou." << endl;
+    cout << "Zvednes zrak a uvidis dva demony, jak se spousti ze stromu primo na tebe." << endl;
+    cont();
+    cout << "Dopadnou pred tebe a okamzite utoci." << endl;
+    cout << "Boj je rychly, chaoticky a nebezpecny." << endl;
+    boss = 0; em = 2; ej1 = "Freya"; el1 = 3; ehp1 = 40; edmgmult1 = 2; ej2 = "Kael"; el2 = 1; ehp2 = 50; edmgmult2 = 1,2;
+    combat();
+    cont();
+    cout << "Nakonec oba padnou a ty se zadychas." << endl;
+    cout << "\"Tohle uz zacina byt fakt unavny...\"" << endl;
+    cont();
+    cout << "Po boji si utris pot z cela a vydas se dal po ceste." << endl;
+    cout << "Les kolem je tichy, jako by sam cekal, co se stane priste." << endl;
+    cout << "Ale ty jdes dal, krok za krokem, smerem k dalsi oblasti." << endl;
+    cont();
+    cout << "\"Snad uz bude klid... aspon na chvili,\" zamumlas a pokracujes v ceste." << endl;
+    cont();
+    cout << "Po dlouhe ceste lesem se krajina zacne pomalu menit." << endl;
+    cout << "Stromy rednou a pred tebou se otevre sirsi prostor." << endl;
+    cout << "Vzduch je chladnejsi a ticho hustsi nez driv." << endl;
+    cont();
+    cout << "Kdyz udelas dalsich par kroku, vsimnes si, ze se zeme meni." << endl;
+    cout << "Mene listi, vice kamenu, vice stop... lidskych stop." << endl;
+    cout << "\"Takze tu nekdo byl... mozna jeste je,\" zamumlas." << endl;
+    cont();
+    cout << "Cesta se rozdvojuje a ty se rozhodnes jit smerem, kde je vic stop." << endl;
+    cout << "Po chvili narazis na rozbity vozik a par roztrhanych pytlu." << endl;
+    cout << "Neco se tu stalo. A ne tak davno." << endl;
+    cont();
+    cout << "Kdyz se rozhlizis, zahlidnes v dalce neco jako kamennou branu." << endl;
+    cout << "Neni to vesnice... spise vstup do dalsi oblasti, mozna do udoli nebo starobyle stezky." << endl;
+    cont();
+    cout << "\"Tak jo... jdeme dal,\" zamumlas a vykrocis smerem k brane." << endl;
+    cont();
+    cout << "Vstoupis hloubeji do nove oblasti a atmosfera se okamzite zmeni." << endl;
+    cout << "Vzduch je tezsi, jako by tu neco viselo ve vzduchu." << endl;
+    cout << "Kamenna brana za tebou se pomalu ztraci v mlze." << endl;
+    cont();
+    cout << "Cesta pred tebou je poseta starymi znackami, vytesanymi do kamenu." << endl;
+    cout << "Nerozumis jim, ale citis, ze nejsi prvni, kdo tudy sel." << endl;
+    cont();
+    cout << "Po par minutach chuze slysis zvuk, ktery nepatri prirode." << endl;
+    cout << "Nizke, hluboke duneni... jako by nekdo nebo neco dupalo pod zemi." << endl;
+    cout << "\"Tohle nevypada dobre,\" zamumlas." << endl;
+    cont();
+    cout << "Kdyz pokracujes dal, vsimnes si roztrhaneho batohu opreteho o strom." << endl;
+    cout << "Vedle nej je krev, jeste cerstva." << endl;
+    cout << "\"Nekdo tu byl... a nedopadlo to dobre.\"" << endl;
+    cont();
+    cout << "Z houstiny se ozve prasknuti vetve." << endl;
+    cout << "Zastavis se, chytis zbran a pomalu se otocis." << endl;
+    cout << "Nic. Jen stiny mezi stromy." << endl;
+    cont();
+    cout << "Pak se objevi svetlo. Slabe, mihotave, jako lucerna." << endl;
+    cout << "Nekdo ji tu nechal. Nebo ji tu nekdo nese." << endl;
+    cont();
+    cout << "Kdyz se priblizis, zjistis, ze lucerna visi na vetvi." << endl;
+    cout << "Pod ni je do zeme vyryta sipka smerem dal do oblasti." << endl;
+    cout << "\"Takze nekdo chce, abych sel timhle smerem... nebo me chce nalakat,\" zamumlas." << endl;
+    cont();
+    cout << "Ale i tak vykrocis. Protoze cesta zpet uz neexistuje." << endl;
+    cont();
+    cout << "Jdes dal podle sipky vyryte do zeme, kdyz se mlha kolem tebe zacne zhusťovat." << endl;
+    cout << "Zvuky lesa se ztraci a zustava jen ticho, ktere ti leze pod kuzi." << endl;
+    cont();
+    cout << "Najednou zaslechnes tichy sramot. Ne demonicky... spise lidsky." << endl;
+    cout << "Zastavis se a chytis zbran, pripraveny na cokoliv." << endl;
+    cont();
+    cout << "Zpoza kamene vyjde postava zahalena v tmavem plasti." << endl;
+    cout << "Je hubena, unavena, ale v ocich ma ostra, ziva svetla." << endl;
+    cout << "\"Stuj!\" zasyci, ale ne z nepratelstvi — spise ze strachu." << endl;
+    cont();
+    cout << "Kdyz uvidi, ze nejsi demon, povoli sevreni ruky na jilu male dykky." << endl;
+    cout << "\"Ty... nejsi jeden z nich,\" vydechne." << endl;
+    cout << "\"Diky bohu. Myslel jsem, ze jsem tu uz sam.\"" << endl;
+    cont();
+    cout << "Postava se priblizi o krok bliz." << endl;
+    cout << "\"Jmenuju se Ralen. Sleduju tu pohyb demonů uz tri dny.\"" << endl;
+    cout << "\"A ty? Co tady delas?\"" << endl;
+    cont();
+    cout << "Chvili si povidate. Ralen ti rekne, ze v tehle oblasti preziva jen par lidi." << endl;
+    cout << "Vetsina se ukryva nekde hloubeji v udoli, ale cesta k nim je nebezpecna." << endl;
+    cont();
+    cout << "\"Jestli chces najit ostatni, muzu te navest... ale nebude to jednoduche,\" rekne." << endl;
+    cout << "\"Tahle oblast je plna stinu, ktere nejsou stiny.\"" << endl;
+    cont();
+    cout << "Ralen se rozhlidne, jako by cekal, ze se kazdou chvili neco objevi." << endl;
+    cout << "\"Jestli chces, muzu te dovest k mistu, kde jsem naposledy videl prezivsi.\"" << endl;
+    cont();
+    cout << "Ralen prikyne, kdyz reknes, ze pujdete spolu." << endl;
+    cout << "\"Dobre. Drz se u me. Tady se veci meni rychleji, nez stihnes mrknout.\"" << endl;
+    cont();
+    cout << "Vydate se po uzke stezce, kterou bys sam sotva nasel." << endl;
+    cout << "Ralen jde tiše, jako by znal kazdy kamen a kazdy koren." << endl;
+    cout << "Ty se snazis drzet krok, ale atmosfera je cim dal hustsi." << endl;
+    cont();
+    cout << "\"Tady jsem naposledy videl prezivsi,\" rekne Ralen a ukaze na rozbity vozik." << endl;
+    cout << "Kolem jsou stopy boje, krev a roztrhane kusy latky." << endl;
+    cout << "\"Demoni je prepadli. Ale nekteri utekli.\"" << endl;
+    cont();
+    cout << "Pokračujete dal, kdyz se mlha kolem vas zacne hybat." << endl;
+    cout << "Ralen zvedne ruku na znamení, abys zastavil." << endl;
+    cout << "\"Slysis to?\"" << endl;
+    cont();
+    cout << "Zprava se ozve hluboke vrčení. Zleva prasknuti vetve." << endl;
+    cout << "Ralen sevře svou dyku." << endl;
+    cout << "\"Jsou tu. Drz se u me.\"" << endl;
+    cont();
+    cout << "Po chvili se zvuky ztrati a oblast opet ztichne." << endl;
+    cout << "Ralen vydechne, ale nevypada klidne." << endl;
+    cout << "\"Tohle misto je horsi, nez jsem cekal. Ale prezivsi jsou blizko.\"" << endl;
+    cont();
+    cout << "Jdete dal, az dorazite k uzkemu udoli." << endl;
+    cout << "Na zemi je vyryta mala znacka — kruh s krizkem uprostred." << endl;
+    cout << "\"Tohle delaji prezivsi. Je to jejich signal. Jsme na spravne ceste.\"" << endl;
+    cont();
+    cout << "Ralen se otoci k tobe." << endl;
+    cout << "\"Odtud uz to bude nebezpecnejsi. Ale jestli chces najit ostatni, musime pokracovat.\"" << endl;
+    cont();
+    cout << "Ralen te vede uzkou cestou dolu do udoli." << endl;
+    cout << "Mlha se drzi pri zemi a kazdy krok zni, jako bys slapal po kostech." << endl;
+    cout << "Vzduch je chladny a tichy, az neprijemne." << endl;
+    cont();
+    cout << "\"Jsme blizko,\" rekne Ralen potichu. \"Tady jsem slysel hlasy prezivsich.\"" << endl;
+    cont();
+    cout << "Kdyz prochazite mezi dvema vysokymi skalami, ozve se slabe zavrceni." << endl;
+    cout << "Ne hlasite... spise jako varovani." << endl;
+    cont();
+    cout << "Zpoza kamene se vybelha slabsi demon." << endl;
+    cout << "Je zraneny, kulha, ale i tak se na vas vrhne." << endl;
+    cont();
+    cout << "\"Pozor!\" zakrici Ralen a uhne stranou." << endl;
+    cout << "Demon se vrhne primo na tebe a boj zacina." << endl;
+    boss = 0; em = 1; ej1 = "Aurelia"; el1 = 1; ehp1 = 25; edmgmult1 = 0.5;
+    combat();
+    cont();
+    cout << "Po kratkem souboji demon padne k zemi." << endl;
+    cout << "Ralen si oddechne." << endl;
+    cout << "\"Tenhle byl slaby... ale kdyz je tu jeden, muzou byt dalsi. Musime jit.\"" << endl;
+    cont();
+    cout << "Pokračujete dal udolim, az se mlha zacne rozestupovat." << endl;
+    cout << "Pred vami se objevi nizka skalni stena s malym otvorem." << endl;
+    cout << "Zvnitr se ozyvaji tlumene hlasy." << endl;
+    cont();
+    cout << "\"Tady jsou,\" rekne Ralen s ulevou." << endl;
+    cout << "\"Prezivsi. Konecne jsme je nasli.\"" << endl;
+    cont();
+    cout << "Na rozdil od jinych mist jsou tito lide pratelsky, skoro nadseni, ze te vidi." << endl;
+    cont();
+    cout << "\"Konecne nekdo dalsi!\" zvola starsi zena." << endl;
+    cout << "\"Pojd, posad se, musis byt vycerpany,\" rekne mladsi muz a ukaze ti misto." << endl;
+    cont();
+    cout << "Sednes si a lide se kolem tebe shromazdi. Kazdy chce mluvit, kazdy chce pomoct." << endl;
+    cout << "\"Co se tu stalo?\" zeptas se." << endl;
+    cont();
+    cout << "Muz s jizvou pres tvar si odkasle." << endl;
+    cout << "\"Demoni... ale ne jen tak ledajaci. Tady v udoli se pohybuji ruzne druhy.\"" << endl;
+    cout << "\"Jsou rozdeleni do sedmi urovni.\"" << endl;
+    cont();
+    cout << "\"Level jedna je bezny demon. Slaby, rychly, nic zvlastniho,\" rekne zena." << endl;
+    cout << "\"Jeden z techhle... Artemis, myslim, se tu objevil pred tydnem.\"" << endl;
+    cont();
+    cout << "\"Level sedm... to je jejich vladce,\" rekne muz s jizvou a hlas mu poklesne." << endl;
+    cout << "\"Alaric. Nikdo se mu nevyrovna.\"" << endl;
+    cont();
+    cout << "Jiny prezivsi dodava: \"Nejvyssi uroven demona, ktereho kdy clovek zabil, byla petka.\"" << endl;
+    cout << "\"Ale to bylo pred sestnacti lety. Posledni velky odboj lidstva.\"" << endl;
+    cout << "\"Od te doby... jen prezivame.\"" << endl;
+    cont();
+    cout << "\"A demoni levelu pet a vys?\" zeptas se." << endl;
+    cout << "Zena prikyne." << endl;
+    cout << "\"Vsichni maji specialni schopnosti. Kazdy jeden. A kazdy jinou.\"" << endl;
+    cont();
+    cout << "Mladik dodava: \"A pobliz... je demon ctyrky.\"" << endl;
+    cout << "\"Ale kde presne je, to nevi nikdo.\"" << endl;
+    cont();
+    cout << "Po dlouhem rozhovoru s prezivsimi se dav kolem tebe zacne pomalu rozchazet." << endl;
+    cout << "Kazdy z nich ti popral stesti, kazdy se snazil predat ti aspon nejakou informaci." << endl;
+    cont();
+    cout << "Kdyz se otocis, uvidis jak k tobe prichazi Ralen." << endl;
+    cout << "Opira se o stenu, vypada unavene, ale usmiva se." << endl;
+    cont();
+    cout << "\"Tak co, jak se ti libi nase mala skupina?\" zepta se." << endl;
+    cout << "Ty se pousmejes a prikynes." << endl;
+    cont();
+    cout << "\"Mimochodem... myslim, ze jsme se jeste poradne nepredstavili,\" rekne Ralen." << endl;
+    cout << "\"Ja jsem Ralen. A ty jsi...?\"" << endl;
+    cont();
+    cout << "Chvili mlcis, pak odpovis: \"" << jmeno <<"\"" << endl;
+    cout << "Ralen prikyne, jako by si jmeno zapamatoval." << endl;
+    cout << "\"Dobre. Tak tedy,"<< jmeno <<", jsem rad, ze jsi prezil az sem.\"" << endl;
+    cont();
+    cout << "Chystas se odejit, ale prezivsi te zastavi." << endl;
+    cout << "\"Pockej!\" zvola starsi zena." << endl;
+    cout << "\"Jsi zraneny. Nech nas ti aspon osetrit rany.\"" << endl;
+    cont();
+    cout << "Chvili vahas, ale nakonec prikynes." << endl;
+    cout << "\"Dobře... asi by to nebylo spatne.\"" << endl;
+    cont();
+    cout << "Zavedou te do male mistnosti vytesane do skaly." << endl;
+    cout << "Je tam skutecna postel. Prvni, kterou jsi videl po velmi dlouhe dobe." << endl;
+    cont();
+    cout << "Lehnes si a citis, jak se ti telo uvolnuje." << endl;
+    cout << "Nekdo ti osetri rany, nekdo jiny ti poda vodu." << endl;
+    cout << "Pak se ti oci zacnou zavirat." << endl;
+    cont();
+    cout << "Usnes. A spis dlouho." << endl;
+    cout << "Tri cele dny." << endl;
+    cont();
+    cout << "Kdyz se probudis, citis se lehci, silnejsi, jako by ti nekdo vratil zivot." << endl;
+    cout << "Prezivsi se na tebe usmivaji." << endl;
+    cout << "\"Vypadal jsi, ze to potrebujes,\" rekne jeden z nich." << endl;
+    cont();
+    cout << "Postavis se, protahnes se a podekujes jim." << endl;
+    cout << "\"Dekuji vam vsem. Opravdu.\"" << endl;
+    cout << "Oni jen prikynou, nekteri se usmeji." << endl;
+    cont();
+    cout << "Pak se otocis smerem k vychodu z ukrytu." << endl;
+    cout << "\"Je cas jit dal,\" zamumlas a vydas se ven.\"" << endl;
+    cont();
+    cout << "Opustis skalni ukryt a znovu se ocitnes venku v chladnem vzduchu udoli." << endl;
+    cout << "Prezivsi ti naposledy zamavaji a Ralen ti popreje stesti." << endl;
+    cont();
+    cout << "Vydas se dal po uzke stezce, ktera se vine mezi skalami a hustou mlhou." << endl;
+    cout << "Cesta je dlouha, monotonna a ticha. Jen vitr obcas zafouka mezi stromy." << endl;
+    cont();
+    cout << "Jdes hodiny. Mozna cele dny. Cas se v tomhle svete ztraci." << endl;
+    cout << "Ale pokracujes, krok za krokem, protoze nic jineho ti nezbyva." << endl;
+    cont();
+    cout << "Krajina se zacne menit. Stromy jsou nizsi, skaly ostrejsi a vzduch tezsi." << endl;
+    cout << "Mas pocit, ze se neco blizi. Neco velkeho." << endl;
+    cont();
+    cout << "Kdyz vyjdes na mensi planinu, vse se najednou zastavi." << endl;
+    cout << "Vitr utichne. Ptaci zmizi. Ticho je absolutni." << endl;
+    cont();
+    cout << "A pak ho uvidis." << endl;
+    cout << "Obrovska silueta stoji uprostred planiny, zada k tobe." << endl;
+    cout << "Je dvakrat vyssi nez bezny demon, jeho telo je pokryte temnymi znaky." << endl;
+    cout << "Kazdy jeho pohyb vypada, jako by se kolem nej deformoval vzduch." << endl;
+    cont();
+    cout << "Zastavis se. Srdce ti ztuhne." << endl;
+    cout << "V tu ranu si vzpomenes na slova prezivsich." << endl;
+    cout << "\"Demoni jsou rozdeleni do sedmi urovni...\"" << endl;
+    cout << "\"Level jedna je bezny demon...\"" << endl;
+    cout << "\"Level ctyri... to uz je monstrum.\"" << endl;
+    cont();
+    cout << "A ted ti to dojde." << endl;
+    cout << "\"Tohle... tohle je demon ctyrky,\" zamumlas." << endl;
+    cout << "Nejsilnejsi, jakeho jsi kdy videl. Nejsilnejsi, jakemu jsi kdy celil." << endl;
+    cont();
+    cout << "Ale neni cas premyslet." << endl;
+    cout << "Demon se otoci. Jeho oci se rozzari temnym svetlem." << endl;
+    cout << "Vsiml si te." << endl;
+    cont();
+    cout << "Zavrci tak hluboce, ze se ti rozvibruje hrudnik." << endl;
+    cout << "A pak se rozbehne primo na tebe." << endl;
+    cont();
+    cout << "Demon se riti primo na tebe, jeho kroky dunive otresaji zemi." << endl;
+    cout << "Kazdy jeho pohyb vypada, jako by mel silu roztrhnout skalu napul." << endl;
+    cont();
+    cout << "Zvednes zbran a pripravis se. Srdce ti busi jako o zavod." << endl;
+    cout << "\"Musim to prezit... jinak je konec,\" zamumlas." << endl;
+    boss = 1; em = 1; ej1 = "Aurelia"; el1 = 4; ehp1 = 160; edmgmult1 = 2;
+    combat();
+    cont();
+    cout << "Tvoje zbran projede jeho hrudi a demon vydá posledni, hluboky rev." << endl;
+    cont();
+    cout << "Obrovske telo se zhrouti na zem a planina se opet ponoří do ticha." << endl;
+    cout << "Stojis tam, zadychas se, cele telo te boli... ale zvitezil jsi." << endl;
+    cont();
+    cout << "\"Demon ctyrky... a ja ho porazil...\" vydechnes nevericne." << endl;
+    cout << "Ale vis, ze tohle byl jen zacatek." << endl;
+    cont();
+    cout << "Stojis nad mrtvym telem demona ctyrky, cele telo se ti trese." << endl;
+    cout << "Kazdy nadech boli, kazdy pohyb je jako rana nozem." << endl;
+    cont();
+    cout << "\"Dokazal jsem to...\" vydechnes, ale hlas se ti skoro ztrati." << endl;
+    cout << "Tvoje nohy povoli a ty klesnes na kolena." << endl;
+    cont();
+    cout << "Zem pod tebou se zacne houpat, jako by se svet otacel." << endl;
+    cout << "Zrak se ti rozmazava, slova se ti ztraci v hlave." << endl;
+    cont();
+    cout << "\"Ne... ted ne...\" pokusis se vstát, ale telo te neposloucha." << endl;
+    cout << "Padnes do prachu a tma te pohltí." << endl;
+    cont();
+    cout << "Upadnes do bezvedomi." << endl;
+    cont();
+    cout << "Pomalu otevres oci. Strop nad tebou je kamenny, hladky, neznamy." << endl;
+    cout << "Chvili nevis, kde jsi. Pak si uvedomis, ze lezis v posteli." << endl;
+    cont();
+    cout << "Nekdo ti dal ciste obvazy, nekdo te umyl, nekdo se o tebe postaral." << endl;
+    cout << "Citit, ze jsi zivy, je skoro zvlastni." << endl;
+    cont();
+    cout << "Dvere se otevrou a vejde Ralen." << endl;
+    cout << "Usmeje se, kdyz vidi, ze jsi vzhuru." << endl;
+    cont();
+    cout << "\"No konecne,\" rekne tise." << endl;
+    cout << "\"Myslel jsem, ze to neprezijes. Nasel jsem te na planine, skoro mrtveho.\"" << endl;
+    cont();
+    cout << "Posadis se, i kdyz to boli." << endl;
+    cout << "\"Ty... tys me zachranil?\"" << endl;
+    cont();
+    cout << "Ralen prikyne." << endl;
+    cout << "\"Samozrejme. Nemohl jsem te tam nechat.\"" << endl;
+    cout << "\"Kdyz jsem videl mrtve telo toho demona... vedel jsem, ze jsi bojoval jako cert.\"" << endl;
+    cont();
+    cout << "\"Spal jsi dva dny,\" dodá." << endl;
+    cout << "\"Ale vypadas, ze se das dohromady.\"" << endl;
+    cont();
+    cout << "Zhluboka se nadechnes a opres se o stenu." << endl;
+    cout << "\"Dekuji... Ralene. Opravdu.\"" << endl;
+    cont();
+    cout << "Ralen se pousmeje a poklepe te po rameni." << endl;
+    cout << "\"Jsme v tom vsichni spolu. A ty jsi ted jeden z nas.\"" << endl;
+    cont();
+    cout << "Kdyz se konecne postavis, prezivsi se shromazdi kolem tebe." << endl;
+    cout << "\"Jsme radi, ze jsi v poradku,\" rekne starsi zena." << endl;
+    cout << "\"Odpocivej, kolik budes potrebovat.\"" << endl;
+    cont();
+    cout << "Ty prikynes, ale v ocich mas odhodlani." << endl;
+    cout << "\"Musim jit dal. Tohle byl jen zacatek.\"" << endl;
+    cont();
+    cout << "Prezivsi ti pripravi vybavu, vodu a par rad." << endl;
+    cout << "Kdyz odchazis, vsichni ti zamavaji." << endl;
+    cont();
+    cout << "Drz se, " << jmeno << " rekne Ralen naposledy." << endl;
+    cout << "A ty vykrocis z ukrytu zpet do temneho sveta." << endl;
+    cont();
+    cout << "Kdyz uz skoro odchazis z ukrytu, zaslysis za sebou rychle kroky." << endl;
+    cout << "Ohlidnes se a uvidis, jak k tobe bezi Ralen." << endl;
+    cont();
+    cout << "\"Pockej!\" zvola zadysene." << endl;
+    cout << "Zastavis se a otocis se k nemu." << endl;
+    cont();
+    cout << "Ralen se na chvili vydycha a pak ti poda malou lahvicku." << endl;
+    cout << "Je to lektvar oziveni, jemne zarici svetle modrou barvou." << endl;
+    cont();
+    cout << "\"Chtel jsem ti to dat driv, ale spal jsi jako zabity,\" rekne s usmevem." << endl;
+    cout << "\"Vem si to. Nikdy nevis, kdy se ti bude hodit.\"" << endl;
+    cont();
+    cout << "Chvili na lahvicku koukas, pak ji opatrne vezmes." << endl;
+    cout << "\"Dekuji... opravdu.\"" << endl;
+    cout << "Ralen prikyne, jako by to byla samozrejmost." << endl;
+    cont();
+    cout << "\"Ale nevypij to hned,\" dodá." << endl;
+    cout << "\"Takove veci se maji setrit na nejhorsi mozny okamzik.\"" << endl;
+    cont();
+    cout << "Schovas lahvicku hluboko do sveho vaku." << endl;
+    cout << "Mas pocit, ze jednou ti muze zachranit zivot." << endl;
+    cont();
+    cout << "\"Tak... ted uz opravdu musim jit,\" reknes." << endl;
+    cout << "Ralen ti naposledy poklepe na rameno." << endl;
+    cout << "\"Drz se, " << jmeno <<". A vrat se, jestli prezijes.\"" << endl;
+    cont();
+    cout << "Otočíš se a vykrocis do temneho sveta, tentokrat o neco silnejsi nez driv." << endl;
+    cont();
+    hp = maxhp;
+    mp = maxmp;
+    cout << "Opustis udoli a vydas se dal po kamenite stezce." << endl;
+    cout << "Cesta je dlouha, ticha a pustá. Jen vitr obcas zafouka mezi skalami." << endl;
+    cont();
+    cout << "Po nekolika hodinach narazis na slabeho demona." << endl;
+    cout << "Je vychrtly, pomaly a vypada, jako by sotva stal na nohou." << endl;
+    boss = 0; em = 1; ej1 = "Aurelia"; el1 = 1; ehp1 = 25; edmgmult1 = 0.5;
+    combat();
+    cont();
+    cout << "Bez vetsiho problemu ho porazis. Demon padne k zemi a ty si vsimnes, ze neco drzi." << endl;
+    cout << "Je to kus stareho pergamenu... vypada to jako mapa." << endl;
+    cont();
+    cout << "\"Mapa...? A proc by ji mel demon?\" zamumlas." << endl;
+    cout << "Ale stejne ji rozlozis a podivas se na ni." << endl;
+    cont();
+    cout << "Mapa ukazuje cestu k nejakemu mistu hluboko ve skalach." << endl;
+    cout << "A protoze nemas nic lepsiho na praci, rozhodnes se ji nasledovat." << endl;
+    cont();
+    cout << "Po dlouhe ceste dorazis k obrovske budove vytesane primo do skaly." << endl;
+    cout << "Je temna, masivni a uz na prvni pohled je jasne, ze ji postavili demoni." << endl;
+    cont();
+    cout << "Vejdes dovnitr. Chodba je siroka, steny pokryte temnymi znaky." << endl;
+    cout << "A pak se pred tebou objevi dva strazni demoni." << endl;
+    cont();
+    cout << "Bez varovani se na tebe vrhnou. Boj je rychly a tvrdy." << endl;
+    boss = 0; em = 2; ej1 = "Haru"; el1 = 1; ehp1 = 65; edmgmult1 = 1; boss = 0; em = 2; ej1 = "Björn"; el1 = 2; ehp1 = 55; edmgmult1 = 2;
+    combat();
+    cont();
+    hp = maxhp;
+    mp = maxmp;
+    cout << "Ale nakonec oba padnou k zemi." << endl;
+    cont();
+    cout << "Pokračujes dal az do hlavni haly." << endl;
+    cout << "A tam ho uvidis." << endl;
+    cont();
+    cout << "Obrovske monstrum se ctyrmi rukama stoji uprostred mistnosti." << endl;
+    cout << "Jeho telo je pokryte znaky, ktere vypadaji jako ziva temnota." << endl;
+    cout << "Jeho oci sleduji kazdy tvuj krok." << endl;
+    cont();
+    cout << "Demon promluvi. Jeho hlas je hluboky, trhany, ale rozumitelny." << endl;
+    cout << "\"Ty... clovek... prisel... sem...?\"" << endl;
+    cont();
+    cout << "A v tu chvili ti to dojde." << endl;
+    cout << "\"On... on umi mluvit. To znamena...\"" << endl;
+    cout << "\"...level pet. Nebo vyssi.\"" << endl;
+    cont();
+    cout << "Srdce se ti rozbusi. Vis, ze se schyluje k boji, jaky jsi jeste nezazil." << endl;
+    cout << "Rychle vytahnes lektvar oziveni, ktery ti dal Ralen." << endl;
+    cout << "Vypijes ho jednim hltam. Telo se ti naplni energii." << endl;
+    cont();
+    cout << "\"Tak jo... jdeme na to,\" zamumlas." << endl;
+    cout << "A vrhnes se do boje proti demonovi 5. urovne." << endl;
+    cout << endl << "Vyberte si obtiznost:" << endl << "1) Normalni" << "2) Narocna" << "3) silena" << endl;
+    cin >> level;
+    while (level > 3 || level < 1) {
+        cout <<endl << "Neplatna hodnota" << endl;
+        cin>> level;
+    }
+    boss = 2; em = 1; ej1 = "Ascendrax"; el1 = 5; ehp1 = 200; edmgmult1 = 1;
+    combat();
+    cont();
+    cout << "Stojis nad mrtvym telem demona petky. Telo se ti trasi, dech je prerusovany." << endl;
+    cout << "Kazdy pohyb je bolest. Kazda kapka krve, ktera z tebe odkapne, je jako ztracena cast tebe." << endl;
+    cont();
+    cout << "Kdyz se podivas na svou levou stranu, uvedomis si, ze tam uz neni ruka." << endl;
+    cout << "Jen krvava rana, ktera pulzuje a vypada, jako by se kazdou chvili mela zavrit sama do sebe." << endl;
+    cont();
+    cout << "\"Ale... dokazal jsem to...\" zasipsis." << endl;
+    cout << "\"Demon petky... uplne sam...\"" << endl;
+    cont();
+    cout << "Kleknou ti nohy. Telo se zacne hroutit. Svet kolem tebe se rozmazava." << endl;
+    cout << "Ale i tak se pousmejes. Slabe. Unavene. Ale uprimne." << endl;
+    cont();
+    cout << "\"Aspon... jsem nepadl zbytecne...\"" << endl;
+    cout << "Tvoje oci se zavrou. Telo povoli. A tma te pohltí." << endl;
+    cont();
+    cout << jmeno << " umira." << endl;
+    cont();
+    cout << "Svet se nezastavil. Demoni dal kraceli po zemi, nicili, zabijeli, ovladali." << endl;
+    cout << "Ale neco se zmenilo. Neco, co demoni necekali." << endl;
+    cont();
+    cout << "Zprava o smrti "<< jmeno <<"a se sirila rychleji nez vitr." << endl;
+    cout << "Lide, kteri se roky skryvali, se zacali objevovat znovu." << endl;
+    cout << "Kazdy slysel pribeh o cloveku, ktery sam porazil demona ctyrky..." << endl;
+    cout << "A pak i demona petky." << endl;
+    cont();
+    cout << "Lide tomu nejdriv neverili. Ale pak prisli ti, kteri videli jeho telo." << endl;
+    cout << "Ti, kteri videli mrtve monstrum peti urovni." << endl;
+    cout << "A ti, kteri videli, jak padl... ale neustoupil." << endl;
+    cont();
+    cout << "A tak se pribeh " << jmeno <<"a stal plamenem." << endl;
+    cout << "Plamenem, ktery se rozsiril po celem svete." << endl;
+    cout << "Plamenem, ktery zapalil srdce lidi, kteri uz davno prestali verit." << endl;
+    cont();
+    cout << "Poprve po sestnacti letech se lidstvo zvedlo." << endl;
+    cout << "Poprve po sestnacti letech se nekdo postavil demonum." << endl;
+    cout << "Poprve po sestnacti letech se znovu zacalo bojovat." << endl;
+    cont();
+    cout << "A vsechno to zacalo jednim clovekem." << endl;
+    cout << "Jednim, ktery nikdy nevedel, co jeho smrt zmeni." << endl;
+    cout << "Jednim, ktery nikdy neuslysi, jak o nem lide mluvi." << endl;
+    cout << "Jednim, ktery nikdy neuvidi, jak jeho odvaha probudila svet." << endl;
+    cont();
+    cout << jmeno <<" se stal hrdinou." << endl;
+    cout << "Hrdinou, ktery nikdy nepoznal svou vlastni slavu." << endl;
+    cout << "Hrdinou, ktery padl... aby ostatni mohli povstat." << endl;
+    cont();
+    cout << "A tak zacala nova era." << endl;
+    cout << "Era odporu. Era odvahy. Era, kterou zapocal clovek, ktery uz nebyl mezi zivy." << endl;
+    cont();
+    cout << "Konec hry." << endl;
+    cont();
+    abort;
+
+        
+
+    }
